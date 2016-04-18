@@ -49,11 +49,11 @@ public class Solver {
 		
 		pq.add(initial);
 		
-		/*while(!initial.isGoal()){
+		while(!initial.isGoal()){
 			
 			createChilds(initial);
 			break;
-		}*/
+		}
 		
 		
 	}
@@ -67,8 +67,13 @@ public class Solver {
 				break;
 			}
 		}
+		System.out.println(b.toString());
 		
-		b.addToQueue(up(b, pos));
+		down(b, pos);
+		//b.addToQueue(up(b, pos));
+		
+		System.out.println(b.toString());
+		
 		b.addToQueue(down(b, pos));
 		b.addToQueue(left(b, pos));
 		b.addToQueue(right(b, pos));
