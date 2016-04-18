@@ -1,8 +1,9 @@
 import java.util.Arrays;
+import java.util.PriorityQueue;
 
 public class Solver {
 	
-	String[] foo = {"hej", "hej2"};
+	String[] sol = {"1", "2", "3", "4", "5", "6", "7", "8", "0"};
 	
 	public Solver(){}
 	
@@ -12,8 +13,8 @@ public class Solver {
 		return 1;
 	}
 	
-	public Iterable<String> neighbors(){
-		return Arrays.asList(foo);
+	public Iterable<String> solution(){
+		return Arrays.asList(sol);
 	}
 	
 	public static void main(String[] args){ // some code here
@@ -35,7 +36,17 @@ public class Solver {
 		Board initial = new Board(blocks);
 		
 		System.out.println(initial.toString());
-		//initial.toString();
+		
+		PriorityQueue<Board> pq = new PriorityQueue<Board>();
+		
+		pq.add(initial);
+		
+		
+		while(true){
+			
+			
+			
+		}
 		
 		
 	}	
