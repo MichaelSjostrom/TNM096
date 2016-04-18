@@ -80,7 +80,9 @@ public class Board {
 				
 				if(this.blocks[i] != y.blocks[i]){
 					equals = false;
+					break;
 				}
+				
 			
 		}
 		
