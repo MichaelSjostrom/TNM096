@@ -1,6 +1,7 @@
 
 public class Main {
 
+
 	public static void main(String[] args){ // some code here}
 		
 		Solver sv = new Solver();
@@ -9,4 +10,5 @@ public class Main {
 	}
 
 	
+
 }
