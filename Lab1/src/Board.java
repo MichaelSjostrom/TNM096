@@ -87,6 +87,12 @@ public class Board {
 		return equals;
 	}
 	
+	public void addToQueue(Board b){
+		if(b != null && neighbors.indexOf(b) == -1){
+			//add to queue.. 
+		}
+	}
+	
 	public Iterable<Board> neighbors(){
 		return null;
 	}

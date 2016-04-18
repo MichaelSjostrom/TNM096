@@ -73,6 +73,8 @@ public class Solver {
 		b.addToQueue(left(b, pos));
 		b.addToQueue(right(b, pos));
 		
+		
+		
 	}
 	
 	private static Board up(Board b, int pos){
@@ -80,6 +82,36 @@ public class Solver {
 			int newVal = b.blocks[pos - 3];
 			b.blocks[pos] = newVal;
 			b.blocks[pos - 3] = 0;
+			
+			return b;
+		}
+		return null;
+	}
+	private static Board down(Board b, int pos){
+		if(pos < 6){
+			int newVal = b.blocks[pos + 3];
+			b.blocks[pos] = newVal;
+			b.blocks[pos + 3] = 0;
+			
+			return b;
+		}
+		return null;
+	}
+	private static Board left(Board b, int pos){
+		if(pos % 3 > 0){
+			int newVal = b.blocks[pos - 1];
+			b.blocks[pos] = newVal;
+			b.blocks[pos - 1] = 0;
+			
+			return b;
+		}
+		return null;
+	}
+	private static Board right(Board b, int pos){
+		if(pos % 3 < 2){
+			int newVal = b.blocks[pos + 1];
+			b.blocks[pos] = newVal;
+			b.blocks[pos + 1] = 0;
 			
 			return b;
 		}
