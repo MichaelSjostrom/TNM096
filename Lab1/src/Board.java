@@ -12,12 +12,13 @@ public class Board {
 	public String toString()               // string representation of the board (in the output format specified below)*/
 	
 	public int[][] blocks;
-	private int size;
+	//Temp solution for size
+	private int size = 3;
 	
 	
 	public Board(int[][] blocks){
 		this.blocks = blocks;
-		size = blocks[0].length;
+		//size = this.blocks[0].length;
 		//System.out.println(size + '\n');
 	}
 	
@@ -49,9 +50,9 @@ public class Board {
 		
 		String daBoard = "";
 		//rows
-		for(int i = 0; i < 3; i++){
+		for(int i = 0; i < size; i++){
 			//columns
-			for(int j = 0; j < 3; j++){					
+			for(int j = 0; j < size; j++){					
 				daBoard += " " + Integer.toString(this.blocks[i][j]);
 
 				if(j == 2)
