@@ -10,4 +10,14 @@ public class Board {
 	public boolean equals(Object y)        // does this board equal y?
 	public Iterable<Board> neighbors()     // all neighboring boards
 	public String toString()               // string representation of the board (in the output format specified below)*/
+	
+	private int[][] blocks;
+	
+	
+	public Board(int[][] blocks){
+		this.blocks = blocks;
+	}
+	
+	
+
 }
