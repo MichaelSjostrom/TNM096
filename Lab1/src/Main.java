@@ -1,5 +1,13 @@
 
 public class Main {
 
-	System.out.println("heej");
+
+	public static void main(String[] args){ // some code here}
+		
+		System.out.println("testing");
+		
+	}
+
+	
+
 }
