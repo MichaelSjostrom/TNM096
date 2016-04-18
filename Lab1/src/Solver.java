@@ -71,76 +71,9 @@ public class Solver {
 		
 		while(!initial.isGoal()){
 			
-			createChilds(initial);
 			break;
 		}
-		
-		
+			
 	}
 	
-	private static void createChilds(Board b) {
-		
-		int pos = 0, test = 0;
-		for(int i = 0; i < 9; i++){
-			if(b.blocks[i] == 0) {
-				pos = i;
-				break;
-			}
-		}
-		System.out.println(b.toString());
-		
-		down(b, pos);
-		//b.addToQueue(up(b, pos));
-		
-		System.out.println(b.toString());
-		
-		b.addToQueue(down(b, pos));
-		b.addToQueue(left(b, pos));
-		b.addToQueue(right(b, pos));
-		
-		
-		
-	}
-	
-	private static Board up(Board b, int pos){
-		if(pos > 2){
-			int newVal = b.blocks[pos - 3];
-			b.blocks[pos] = newVal;
-			b.blocks[pos - 3] = 0;
-			
-			return b;
-		}
-		return null;
-	}
-	private static Board down(Board b, int pos){
-		if(pos < 6){
-			int newVal = b.blocks[pos + 3];
-			b.blocks[pos] = newVal;
-			b.blocks[pos + 3] = 0;
-			
-			return b;
-		}
-		return null;
-	}
-	private static Board left(Board b, int pos){
-		if(pos % 3 > 0){
-			int newVal = b.blocks[pos - 1];
-			b.blocks[pos] = newVal;
-			b.blocks[pos - 1] = 0;
-			
-			return b;
-		}
-		return null;
-	}
-	private static Board right(Board b, int pos){
-		if(pos % 3 < 2){
-			int newVal = b.blocks[pos + 1];
-			b.blocks[pos] = newVal;
-			b.blocks[pos + 1] = 0;
-			
-			return b;
-		}
-		return null;
-	}
-
 }
