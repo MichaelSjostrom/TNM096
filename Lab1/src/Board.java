@@ -51,11 +51,9 @@ public class Board {
 		//rows
 		for(int i = 0; i < 3; i++){
 			//columns
-			for(int j = 0; j < 3; j++){
-				
-					
+			for(int j = 0; j < 3; j++){					
 				daBoard += " " + Integer.toString(this.blocks[i][j]);
-				//System.out.println(daBoard);
+
 				if(j == 2)
 					daBoard += '\n';
 			}
@@ -63,5 +61,4 @@ public class Board {
 		
 		return daBoard;
 	}
-
 }
