@@ -25,6 +25,7 @@ public class Solver {
 		int[] blocks = new int[3];
 		
 		//Hårdkodat for now..
+
 		blocks[0] = 0;
 		blocks[1] = 1;
 		blocks[2] = 3;
@@ -35,10 +36,12 @@ public class Solver {
 		blocks[7] = 8;
 		blocks[8] = 6;
 		
-//		Board initial = new Board(blocks);
-		
+		Board initial = new Board(blocks);
 		
 		System.out.println(initial.toString());
+		
+		initial.isGoal();
+		initial.equals(initial);
 		
 		PriorityQueue<Board> pq = new PriorityQueue<Board>();
 		
@@ -76,15 +79,6 @@ public class Solver {
 		b.addToQueue(right(b, pos));
 		
 		
-	}	
-	
-	
-	private static Board up(Board b, int pos){
-		if(pos > 2){
-			
-		}
-		return new Board();
-			
-	}*/
+*/
 
 }

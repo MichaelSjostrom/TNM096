@@ -13,6 +13,7 @@ public class Board {
 	public String toString()               // string representation of the board (in the output format specified below)*/
 	
 	public int[][] blocks;
+
 	private int size;
 	private List<Board> neighbors;
 	
@@ -20,6 +21,25 @@ public class Board {
 	public Board(int[][] blocks){
 		this.blocks = blocks;
 		size = blocks[0].length;
+
+	//Temp solution for size
+	private int size = 3;
+	int[][] goalBoard;
+	
+	public Board(int[][] blocks){
+		this.blocks = blocks;
+		//size = this.blocks[0].length;
+		//System.out.println(size + '\n');
+		goalBoard = new int[3][3];
+		goalBoard[0][0] = 1;
+		goalBoard[0][1] = 2;
+		goalBoard[0][2] = 3;
+		goalBoard[1][0] = 4;
+		goalBoard[1][1] = 5;
+		goalBoard[1][2] = 6;
+		goalBoard[2][0] = 7;
+		goalBoard[2][1] = 8;
+		goalBoard[2][2] = 0;
 	}
 	
 	public int hamming(){
@@ -43,15 +63,47 @@ public class Board {
 	}
 	
 	public boolean isGoal(){
-		return false;
+		
+		boolean goal = true;
+		//rows
+		for(int i = 0; i < size; i++){
+			//columns
+			for(int j = 0; j < size; j++){					
+				if(this.blocks[i][j] != goalBoard[i][j]){
+					goal = false;
+					break;
+				}
+			}
+			if(goal == false)
+				break;
+		}
+		
+		return goal;
 	}
 	
 	public boolean isSolvable(){
 		return false;
 	}
 	
-	public boolean equals(Object y){
-		return false;
+	public boolean equals(Board y){
+		
+		boolean equals = true;
+		
+		//rows
+		for(int i = 0; i < size; i++){
+			//columns
+			for(int j = 0; j < size; j++){					
+				if(this.blocks[i][j] != y.blocks[i][j]){
+					equals = false;
+					break;
+				}
+			}
+			if(equals == false){
+				break;
+			}
+		}
+		
+		return equals;
 	}
 	
 	public Iterable<Board> neighbors(){
@@ -70,9 +122,9 @@ public class Board {
 		
 		String daBoard = "";
 		//rows
-		for(int i = 0; i < 3; i++){
+		for(int i = 0; i < size; i++){
 			//columns
-			for(int j = 0; j < 3; j++){					
+			for(int j = 0; j < size; j++){					
 				daBoard += " " + Integer.toString(this.blocks[i][j]);
 
 				if(j == 2)
