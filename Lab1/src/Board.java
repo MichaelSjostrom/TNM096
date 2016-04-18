@@ -109,8 +109,8 @@ public class Board {
 		
 		String daBoard = "";
 		//rows
-		for(int i = 1; i < size; i++){			
-				daBoard += " " + Integer.toString(this.blocks[i]);
+		for(int i = 1; i < size+1; i++){			
+				daBoard += " " + Integer.toString(this.blocks[i-1]);
 				
 				if(i%3 == 0)
 					daBoard += '\n';
