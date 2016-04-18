@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.List;
 
 public class Board {
@@ -12,7 +13,7 @@ public class Board {
 	public Iterable<Board> neighbors()     // all neighboring boards
 	public String toString()               // string representation of the board (in the output format specified below)*/
 	
-	public int[] blocks;
+	public int[] blocks = new int[9];
 
 	private List<Board> neighbors;
 	
@@ -20,8 +21,18 @@ public class Board {
 	private int size = 9;
 	int[] goalBoard;
 	
+	/** The number of moves since the start. */
+	private int g;
+
+	/** The number of moves to the goal. */
+	private int h;
+	
 	public Board(int[] blocks){
 		this.blocks = blocks;
+		
+	    this.g = 0;
+	    //TODO implement getHeurustic
+	    this.h = Puzzle.getHeuristic(this.blocks);
 
 		goalBoard = new int[9];
 		goalBoard[0] = 1;
@@ -57,15 +68,11 @@ public class Board {
 	
 	public boolean isGoal(){
 		
-		boolean goal = true;
-		for(int i = 0; i < size; i++){
-			if(this.blocks[i] != goalBoard[i]){
-				goal = false;
-				break;
-			}
-		}
-		
-		return goal;
+		int[] p = this.blocks;
+	    for (int i = 1; i < p.length - 1; i++)
+	      if(p[i-1] > p[i]) return false;
+
+	    return (p[0] == 1);
 	}
 	
 	public boolean isSolvable(){
@@ -82,8 +89,6 @@ public class Board {
 					equals = false;
 					break;
 				}
-				
-			
 		}
 		
 		return equals;
@@ -105,7 +110,7 @@ public class Board {
 		
 		String daBoard = "";
 		//rows
-		for(int i = 1; i < size+1; i++){			
+		for(int i = 1; i < blocks.length+1; i++){			
 				daBoard += " " + Integer.toString(this.blocks[i-1]);
 				
 				if(i%3 == 0)
@@ -114,4 +119,40 @@ public class Board {
 		
 		return daBoard;
 	}
+	
+	  /**
+	   * This method returns the g(n) part of the cost function. It is the
+	   * amount of steps that the current state is at.
+	   * @return int - The g(n) of the current state.
+	   */
+	  public int g() {
+	    return this.g;
+	  }
+
+	  /**
+	   * This method returns the h(n) part of the cost function. It is the
+	   * heuristic (steps to the goal state) for the current state.
+	   * @return int - The h(n) of the current state.
+	   */
+	  public int h() {
+	    return this.h;
+	  }
+
+	  /**
+	   * The f(n) or total cost of the current state. This is calculated by
+	   * retrieving the g + h of the state.
+	   * @return int - The f(n) of the current state.
+	   */
+	  public int f() {
+	    return g() + h();
+	  }
+	
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+
+    Board board = (Board) o;
+    return Arrays.equals(blocks, board.blocks);
+  }
 }
