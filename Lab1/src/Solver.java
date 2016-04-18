@@ -58,27 +58,32 @@ public class Solver {
 		
 	}
 	
-	/*private static void createChilds(Board b) {
+	private static void createChilds(Board b) {
 		
 		int pos = 0, test = 0;
-		for(int i = 0; i < 3; i++){
-			for(int j = 0; j < 3; j++){
-				if(b.blocks[i][j] == 0){
-					pos = (i + j + test);
-					i = 3;
-					j = 3;
-				}
-				if(j == 2) test+= 2;
-			}	
+		for(int i = 0; i < 9; i++){
+			if(b.blocks[i] == 0) {
+				pos = i;
+				break;
+			}
 		}
-		
 		
 		b.addToQueue(up(b, pos));
 		b.addToQueue(down(b, pos));
 		b.addToQueue(left(b, pos));
 		b.addToQueue(right(b, pos));
 		
-		
-*/
+	}
+	
+	private static Board up(Board b, int pos){
+		if(pos > 2){
+			int newVal = b.blocks[pos - 3];
+			b.blocks[pos] = newVal;
+			b.blocks[pos - 3] = 0;
+			
+			return b;
+		}
+		return null;
+	}
 
 }
