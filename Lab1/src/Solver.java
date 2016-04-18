@@ -34,5 +34,9 @@ public class Solver {
 		
 		Board initial = new Board(blocks);
 		
+		System.out.println(initial.toString());
+		//initial.toString();
+		
+		
 	}	
 }

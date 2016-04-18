@@ -18,6 +18,7 @@ public class Board {
 	public Board(int[][] blocks){
 		this.blocks = blocks;
 		size = blocks[0].length;
+		//System.out.println(size + '\n');
 	}
 	
 	public int hamming(){
@@ -48,13 +49,14 @@ public class Board {
 		
 		String daBoard = "";
 		//rows
-		for(int i = 0; i < size; i++){
+		for(int i = 0; i < 3; i++){
 			//columns
-			for(int j = 0; j < size; j++){
+			for(int j = 0; j < 3; j++){
 				if(j == 2)
 					daBoard += '\n';
 					
 				daBoard += " " + Integer.toString(this.blocks[i][j]);
+				//System.out.println(daBoard);
 			}
 		}
 		
