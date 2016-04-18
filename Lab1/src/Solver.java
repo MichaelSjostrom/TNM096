@@ -22,7 +22,7 @@ public class Solver {
 	public static void main(String[] args){ // some code here
 		System.out.println("running");
 		
-		int[] blocks = new int[3];
+		int[] blocks = new int[9];
 		
 		//Hårdkodat for now..
 
@@ -49,11 +49,11 @@ public class Solver {
 		
 		pq.add(initial);
 		
-		while(!initial.isGoal()){
+		/*while(!initial.isGoal()){
 			
 			createChilds(initial);
 			break;
-		}
+		}*/
 		
 		
 	}
