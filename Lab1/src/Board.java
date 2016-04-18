@@ -14,12 +14,22 @@ public class Board {
 	public int[][] blocks;
 	//Temp solution for size
 	private int size = 3;
-	
+	int[][] goalBoard;
 	
 	public Board(int[][] blocks){
 		this.blocks = blocks;
 		//size = this.blocks[0].length;
 		//System.out.println(size + '\n');
+		goalBoard = new int[3][3];
+		goalBoard[0][0] = 1;
+		goalBoard[0][1] = 2;
+		goalBoard[0][2] = 3;
+		goalBoard[1][0] = 4;
+		goalBoard[1][1] = 5;
+		goalBoard[1][2] = 6;
+		goalBoard[2][0] = 7;
+		goalBoard[2][1] = 8;
+		goalBoard[2][2] = 0;
 	}
 	
 	public int hamming(){
@@ -27,7 +37,23 @@ public class Board {
 	}
 	
 	public boolean isGoal(){
-		return false;
+		
+		boolean goal = true;
+		//rows
+		for(int i = 0; i < size; i++){
+			//columns
+			for(int j = 0; j < size; j++){					
+				if(this.blocks[i][j] != goalBoard[i][j]){
+					goal = false;
+					System.out.println("is NOT goal");
+					break;
+				}
+			}
+			if(goal == false)
+				break;
+		}
+		
+		return goal;
 	}
 	
 	public boolean isSolvable(){

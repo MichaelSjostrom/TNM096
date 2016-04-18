@@ -36,18 +36,11 @@ public class Solver {
 		Board initial = new Board(blocks);
 		
 		System.out.println(initial.toString());
+		initial.isGoal();
 		
 		PriorityQueue<Board> pq = new PriorityQueue<Board>();
 		
 		pq.add(initial);
-		
-		
-		while(true){
-			
-			
-			
-		}
-		
 		
 	}	
 }
