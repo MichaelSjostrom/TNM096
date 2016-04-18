@@ -53,6 +53,9 @@ public class Board {
 				break;
 		}
 		
+		if(goal)
+			System.out.println("is goal");
+		
 		return goal;
 	}
 	
@@ -61,6 +64,8 @@ public class Board {
 	}
 	
 	public boolean equals(Object y){
+		
+		
 		return false;
 	}
 	

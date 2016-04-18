@@ -33,10 +33,25 @@ public class Solver {
 		blocks[2][1] = 8;
 		blocks[2][2] = 6;
 		
+		int[][] blocks2 = new int[3][3];
+		
+		blocks2[0][0] = 1;
+		blocks2[0][1] = 2;
+		blocks2[0][2] = 3;
+		blocks2[1][0] = 4;
+		blocks2[1][1] = 5;
+		blocks2[1][2] = 6;
+		blocks2[2][0] = 7;
+		blocks2[2][1] = 8;
+		blocks2[2][2] = 0;
+		
 		Board initial = new Board(blocks);
+		Board initial2 = new Board(blocks2);
 		
 		System.out.println(initial.toString());
+		
 		initial.isGoal();
+		initial2.isGoal();
 		
 		PriorityQueue<Board> pq = new PriorityQueue<Board>();
 		
