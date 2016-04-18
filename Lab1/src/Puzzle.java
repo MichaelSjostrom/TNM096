@@ -19,6 +19,15 @@ public class Puzzle {
 	    }
 	  });
 	  
+	  /**
+	   * Constructor for puzzle class.
+	   * @param puzzleInput Valid sliding puzzle in 2D array format.
+	   */
+	  public Puzzle(int[] puzzleInput) {
+	    this.initialBoard = new Board(puzzleInput);
+	    this.currentBoard = this.initialBoard;
+	  }
+	  
 	  public static int getHeuristic(int[] array) {
 		    int heuristic = 0;
 		    
@@ -29,6 +38,8 @@ public class Puzzle {
 		    }*/
 		    return heuristic;
 	  }
+	  
+	  
 	  
 	  public static void main(String[] args){ // some code here
 			System.out.println("running");

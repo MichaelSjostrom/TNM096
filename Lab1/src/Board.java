@@ -19,7 +19,6 @@ public class Board {
 	
 	//Temp solution for size
 	private int size = 9;
-	int[] goalBoard;
 	
 	/** The number of moves since the start. */
 	private int g;
@@ -33,17 +32,6 @@ public class Board {
 	    this.g = 0;
 	    //TODO implement getHeurustic
 	    this.h = Puzzle.getHeuristic(this.blocks);
-
-		goalBoard = new int[9];
-		goalBoard[0] = 1;
-		goalBoard[1] = 2;
-		goalBoard[2] = 3;
-		goalBoard[3] = 4;
-		goalBoard[4] = 5;
-		goalBoard[5] = 6;
-		goalBoard[6] = 7;
-		goalBoard[7] = 8;
-		goalBoard[8] = 0;
 	}
 	
 	public int hamming(){
