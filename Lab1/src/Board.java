@@ -52,11 +52,12 @@ public class Board {
 		for(int i = 0; i < 3; i++){
 			//columns
 			for(int j = 0; j < 3; j++){
-				if(j == 2)
-					daBoard += '\n';
+				
 					
 				daBoard += " " + Integer.toString(this.blocks[i][j]);
 				//System.out.println(daBoard);
+				if(j == 2)
+					daBoard += '\n';
 			}
 		}
 		
