@@ -47,9 +47,18 @@ public class Board {
 	public String toString(){
 		
 		String daBoard = "";
+		//rows
+		for(int i = 0; i < size; i++){
+			//columns
+			for(int j = 0; j < size; j++){
+				if(j == 2)
+					daBoard += '\n';
+					
+				daBoard += " " + Integer.toString(this.blocks[i][j]);
+			}
+		}
 		
-		
-		return null;
+		return daBoard;
 	}
 
 }
