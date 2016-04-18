@@ -60,6 +60,10 @@ public class Puzzle {
 	public void solve() {
 		queue.clear();
 		queue.add(this.initialBoard);
+		System.out.println(this.initialBoard.toString());
+		System.out.println(Solver.right(this.initialBoard, 0).toString());
+		System.out.println(this.initialBoard.toString());
+		
 	}
 
 	public static void main(String[] args) { // some code here
@@ -92,9 +96,11 @@ public class Puzzle {
 		input2[8] = 0;
 
 		Puzzle mPuzzle1 = new Puzzle(input1);
-		Puzzle mPuzzle2 = new Puzzle(input2);
+		//Puzzle mPuzzle2 = new Puzzle(input2);
 
-		System.out.println(mPuzzle2.initialBoard.toString());
+		//System.out.println(mPuzzle2.initialBoard.toString());
+		
+		mPuzzle1.solve();
 
 	}
 }

@@ -34,6 +34,14 @@ public class Board {
 	    this.h = Puzzle.getHeuristic(this.blocks);
 	}
 	
+	public Board(Board b, int pos, int newPos){
+		this.blocks = b.blocks;
+		int newVal = blocks[newPos];
+		blocks[pos] = newVal;
+		blocks[newPos] = 0;
+		
+	}
+	
 	public int hamming(){
 		int ham = 0;
 		/*int test = 1;
