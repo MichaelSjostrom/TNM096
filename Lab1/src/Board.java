@@ -1,3 +1,4 @@
+import java.util.List;
 
 public class Board {
 	/*public Board(int[][] blocks)           // construct a board from an N-by-N array of blocks
@@ -13,16 +14,32 @@ public class Board {
 	
 	public int[][] blocks;
 	private int size;
+	private List<Board> neighbors;
 	
 	
 	public Board(int[][] blocks){
 		this.blocks = blocks;
 		size = blocks[0].length;
-		//System.out.println(size + '\n');
 	}
 	
 	public int hamming(){
-		return 0;
+		int ham = 0;
+		int test = 1;
+		for(int i = 0; i < 3; i++){
+			for(int j = 0; j < 3; j++){
+				
+				System.out.println(i + j + test + " == " + blocks[i][j]);
+				
+				int kalle = (i + j + test);
+				if(blocks[i][j] == kalle) ham++;
+				
+				if(i + j + test == 9 && blocks[i][j] == 0) ham++;
+
+				if(j == 2) test+= 2;
+			}
+		}
+		
+		return ham;
 	}
 	
 	public boolean isGoal(){
@@ -39,6 +56,10 @@ public class Board {
 	
 	public Iterable<Board> neighbors(){
 		return null;
+	}
+	
+	public void addNeighbor(Board b){
+		this.neighbors.add(b);
 	}
 	
 	public int getBoardSize(){

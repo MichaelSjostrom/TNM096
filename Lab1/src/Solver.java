@@ -5,6 +5,8 @@ public class Solver {
 	
 	String[] sol = {"1", "2", "3", "4", "5", "6", "7", "8", "0"};
 	
+	private Board init;
+	
 	public Solver(){}
 	
 	public Solver(Board init){}
@@ -20,34 +22,69 @@ public class Solver {
 	public static void main(String[] args){ // some code here
 		System.out.println("running");
 		
-		int[][] blocks = new int[3][3];
+		int[] blocks = new int[3];
 		
 		//Hårdkodat for now..
-		blocks[0][0] = 0;
-		blocks[0][1] = 1;
-		blocks[0][2] = 3;
-		blocks[1][0] = 4;
-		blocks[1][1] = 2;
-		blocks[1][2] = 5;
-		blocks[2][0] = 7;
-		blocks[2][1] = 8;
-		blocks[2][2] = 6;
+		blocks[0] = 0;
+		blocks[1] = 1;
+		blocks[2] = 3;
+		blocks[3] = 4;
+		blocks[4] = 2;
+		blocks[5] = 5;
+		blocks[6] = 7;
+		blocks[7] = 8;
+		blocks[8] = 6;
 		
-		Board initial = new Board(blocks);
+//		Board initial = new Board(blocks);
+		
 		
 		System.out.println(initial.toString());
 		
 		PriorityQueue<Board> pq = new PriorityQueue<Board>();
 		
+		System.out.println("hamming result: " +  initial.hamming());
+		
 		pq.add(initial);
 		
-		
-		while(true){
+		while(!initial.isGoal()){
 			
-			
-			
+			createChilds(initial);
+			break;
 		}
 		
 		
+	}
+	
+	/*private static void createChilds(Board b) {
+		
+		int pos = 0, test = 0;
+		for(int i = 0; i < 3; i++){
+			for(int j = 0; j < 3; j++){
+				if(b.blocks[i][j] == 0){
+					pos = (i + j + test);
+					i = 3;
+					j = 3;
+				}
+				if(j == 2) test+= 2;
+			}	
+		}
+		
+		
+		b.addToQueue(up(b, pos));
+		b.addToQueue(down(b, pos));
+		b.addToQueue(left(b, pos));
+		b.addToQueue(right(b, pos));
+		
+		
 	}	
+	
+	
+	private static Board up(Board b, int pos){
+		if(pos > 2){
+			
+		}
+		return new Board();
+			
+	}*/
+
 }
