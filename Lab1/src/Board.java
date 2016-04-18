@@ -11,25 +11,24 @@ public class Board {
 	public Iterable<Board> neighbors()     // all neighboring boards
 	public String toString()               // string representation of the board (in the output format specified below)*/
 	
-	public int[][] blocks;
+	public int[] blocks;
 	//Temp solution for size
-	private int size = 3;
-	int[][] goalBoard;
+	private int size = 9;
+	int[] goalBoard;
 	
-	public Board(int[][] blocks){
+	public Board(int[] blocks){
 		this.blocks = blocks;
-		//size = this.blocks[0].length;
-		//System.out.println(size + '\n');
-		goalBoard = new int[3][3];
-		goalBoard[0][0] = 1;
-		goalBoard[0][1] = 2;
-		goalBoard[0][2] = 3;
-		goalBoard[1][0] = 4;
-		goalBoard[1][1] = 5;
-		goalBoard[1][2] = 6;
-		goalBoard[2][0] = 7;
-		goalBoard[2][1] = 8;
-		goalBoard[2][2] = 0;
+
+		goalBoard = new int[9];
+		goalBoard[0] = 1;
+		goalBoard[1] = 2;
+		goalBoard[2] = 3;
+		goalBoard[3] = 4;
+		goalBoard[4] = 5;
+		goalBoard[5] = 6;
+		goalBoard[6] = 7;
+		goalBoard[7] = 8;
+		goalBoard[8] = 0;
 	}
 	
 	public int hamming(){
@@ -39,17 +38,11 @@ public class Board {
 	public boolean isGoal(){
 		
 		boolean goal = true;
-		//rows
 		for(int i = 0; i < size; i++){
-			//columns
-			for(int j = 0; j < size; j++){					
-				if(this.blocks[i][j] != goalBoard[i][j]){
-					goal = false;
-					break;
-				}
-			}
-			if(goal == false)
+			if(this.blocks[i] != goalBoard[i]){
+				goal = false;
 				break;
+			}
 		}
 		
 		return goal;
@@ -63,18 +56,12 @@ public class Board {
 		
 		boolean equals = true;
 		
-		//rows
 		for(int i = 0; i < size; i++){
-			//columns
-			for(int j = 0; j < size; j++){					
-				if(this.blocks[i][j] != y.blocks[i][j]){
+				
+				if(this.blocks[i] != y.blocks[i]){
 					equals = false;
-					break;
 				}
-			}
-			if(equals == false){
-				break;
-			}
+			
 		}
 		
 		return equals;
@@ -92,14 +79,10 @@ public class Board {
 		
 		String daBoard = "";
 		//rows
-		for(int i = 0; i < size; i++){
-			//columns
-			for(int j = 0; j < size; j++){					
-				daBoard += " " + Integer.toString(this.blocks[i][j]);
-
-				if(j == 2)
+		for(int i = 0; i < size; i++){			
+				daBoard += " " + Integer.toString(this.blocks[i]);
+				
 					daBoard += '\n';
-			}
 		}
 		
 		return daBoard;
