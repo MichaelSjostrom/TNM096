@@ -56,8 +56,8 @@ public class Puzzle {
 		if (nextBoard != null && !this.visited.contains(nextBoard))
 			this.queue.add(nextBoard);
 	}
-	
-	public void solve(){
+
+	public void solve() {
 		queue.clear();
 		queue.add(this.initialBoard);
 	}
@@ -93,33 +93,8 @@ public class Puzzle {
 
 		Puzzle mPuzzle1 = new Puzzle(input1);
 		Puzzle mPuzzle2 = new Puzzle(input2);
-		
+
 		System.out.println(mPuzzle2.initialBoard.toString());
-
-		/*
-		 * Board initial = new Board(blocks); Board initial2 = new
-		 * Board(blocks2);
-		 * 
-		 * System.out.println(initial.toString());
-		 * System.out.println(initial.isGoal());
-		 * 
-		 * System.out.println(initial2.toString());
-		 * System.out.println(initial2.isGoal());
-		 */
-
-		// initial.equals(initial);
-
-		// PriorityQueue<Board> pq = new PriorityQueue<Board>();
-
-		// System.out.println("hamming result: " + initial.hamming());
-
-		// pq.add(initial);
-
-		/*
-		 * while(!initial.isGoal()){
-		 * 
-		 * break; }
-		 */
 
 	}
 }
