@@ -45,16 +45,12 @@ public class Board {
 			for(int j = 0; j < size; j++){					
 				if(this.blocks[i][j] != goalBoard[i][j]){
 					goal = false;
-					System.out.println("is NOT goal");
 					break;
 				}
 			}
 			if(goal == false)
 				break;
 		}
-		
-		if(goal)
-			System.out.println("is goal");
 		
 		return goal;
 	}
@@ -63,10 +59,25 @@ public class Board {
 		return false;
 	}
 	
-	public boolean equals(Object y){
+	public boolean equals(Board y){
 		
+		boolean equals = true;
 		
-		return false;
+		//rows
+		for(int i = 0; i < size; i++){
+			//columns
+			for(int j = 0; j < size; j++){					
+				if(this.blocks[i][j] != y.blocks[i][j]){
+					equals = false;
+					break;
+				}
+			}
+			if(equals == false){
+				break;
+			}
+		}
+		
+		return equals;
 	}
 	
 	public Iterable<Board> neighbors(){

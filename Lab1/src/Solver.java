@@ -52,6 +52,7 @@ public class Solver {
 		
 		initial.isGoal();
 		initial2.isGoal();
+		initial.equals(initial);
 		
 		PriorityQueue<Board> pq = new PriorityQueue<Board>();
 		
