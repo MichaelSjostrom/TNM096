@@ -60,10 +60,22 @@ public class Puzzle {
 	public void solve() {
 		queue.clear();
 		queue.add(this.initialBoard);
-		System.out.println(this.initialBoard.toString());
-		System.out.println(Solver.right(this.initialBoard, 0).toString());
-		System.out.println(this.initialBoard.toString());
 		
+		int pos = findIndex();
+		
+		Solver.up(this.currentBoard, pos);
+		Solver.down(this.currentBoard, pos);
+		Solver.left(this.currentBoard, pos);
+		Solver.right(this.currentBoard, pos);
+		
+	}
+	
+	public int findIndex(){
+		for(int i = 0; i < 9; i++)
+			if(this.currentBoard.getNumber(i) == 0)
+				return i;
+		
+		return 1;
 	}
 
 	public static void main(String[] args) { // some code here

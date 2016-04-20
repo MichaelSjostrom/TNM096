@@ -29,13 +29,15 @@ public class Board {
 	public Board(int[] blocks){
 		this.blocks = blocks;
 		
+		
 	    this.g = 0;
 	    //TODO implement getHeurustic
 	    this.h = Puzzle.getHeuristic(this.blocks);
 	}
 	
 	public Board(Board b, int pos, int newPos){
-		this.blocks = b.blocks;
+		
+		this.blocks = Arrays.copyOf(b.blocks, b.blocks.length);
 		int newVal = blocks[newPos];
 		blocks[pos] = newVal;
 		blocks[newPos] = 0;
@@ -106,6 +108,10 @@ public class Board {
 	
 	public int getBoardSize(){
 		return size;
+	}
+	
+	public int getNumber(int index){
+		return this.blocks[index];
 	}
 	
 	public String toString(){
