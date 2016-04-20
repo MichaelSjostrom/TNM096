@@ -35,29 +35,22 @@ public class Puzzle {
 	}
 
 	public static int getHeuristic(int[] array) {
+		int size = 9;
 		int heuristic = 0;
 
-		// TODO Implement our distanceFunction
-		/*
-		 * for(int i = 0; i < array.length; i++) { if (array[i] != 0) heuristic
-		 * += getManhattanDistance(i, array[i]); }
-		 */
+		heuristic = hamming(array);
 		
+		/*for(int i = 0; i < size; i++){
+			if (array[i] != 0)
+				heuristic += manhattan(i, array[i]);
+		}*/
 		
 		return heuristic;
+
 	}
 	
-	public static int manhattan(int index, int value){
-		int size = 9;
-		int distance = 0;
-		
-		for(int i = 0; i < size; i++){
-			if(value != 0){
-				distance = Math.abs((i / 3) - ((board.blocks[i]-1) / 3)) + Math.abs((i % 3) - ((board.blocks[i]-1) % 3));
-			}
-		}
-		
-		return distance;
+	public static int manhattan(int index, int value){			
+		return Math.abs((index / 3) - ((value-1) / 3)) + Math.abs((index % 3) - ((value-1) % 3));
 	}
 
 	/**
@@ -78,6 +71,7 @@ public class Puzzle {
 		queue.clear();
 		queue.add(this.initialBoard);
 		
+		hamming();
 		
 		while(!queue.isEmpty()){
 			
@@ -95,7 +89,7 @@ public class Puzzle {
 			addToQueue(Solver.down(this.currentBoard, pos));
 			addToQueue(Solver.left(this.currentBoard, pos));
 			addToQueue(Solver.right(this.currentBoard, pos));
-		
+			break;
 		}
 		
 		System.out.println("All done");
@@ -107,6 +101,21 @@ public class Puzzle {
 				return i;
 		
 		return 1;
+	}
+	
+	public static int hamming(int[] array){
+		
+		int diff = 0;
+		
+		for(int i = 0; i < array.length; i++){
+			
+			int temp = array[i];
+			if(temp != 0){
+				if(temp != i + 1) diff++;	
+			}	
+		}
+		
+		return diff;
 	}
 
 	public static void main(String[] args) { // some code here
@@ -123,11 +132,10 @@ public class Puzzle {
 		input1[6] = 7;
 		input1[7] = 8;
 		input1[8] = 6;
-
+		
 		int[] input2 = new int[9];
 
 		// Hårdkodat for now..
-
 		input2[0] = 1;
 		input2[1] = 2;
 		input2[2] = 3;
@@ -139,10 +147,7 @@ public class Puzzle {
 		input2[8] = 0;
 
 		Puzzle mPuzzle1 = new Puzzle(input1);
-		//Puzzle mPuzzle2 = new Puzzle(input2);
 
-		//System.out.println(mPuzzle2.initialBoard.toString());
-		
 		mPuzzle1.solve();
 
 	}
