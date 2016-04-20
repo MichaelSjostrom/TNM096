@@ -47,7 +47,7 @@ public class Board {
 		this.g = b.g + 1;
 		this.h = Puzzle.getHeuristic(this.blocks);
 		
-		this.prev = b;
+		//this.prev = b;
 		
 	}
 	
@@ -142,7 +142,6 @@ public class Board {
 
 	  /**
 	   * This method returns the h(n) part of the cost function. It is the
-	   * heuristic (steps to the goal state) for the current state.
 	   * @return int - The h(n) of the current state.
 	   */
 	  public int h() {
@@ -156,6 +155,34 @@ public class Board {
 	   */
 	  public int f() {
 	    return g() + h();
+	  }
+	  
+	  public String allSteps() {
+		    StringBuilder sb = new StringBuilder();
+		    if (this.prev != null) sb.append(prev.allSteps());
+		    sb.append(this.toString());
+		    return sb.toString();
+		  }
+
+	  /**
+	   * This method creates a solution message for when the
+	   * puzzle has been solved using a StringBuilder.
+	   * @return String - The solution message.
+	   */
+	  public String solutionMessage(long millis) {
+	    /*StringBuilder sb = new StringBuilder();
+	    sb.append("Here are the steps to the goal state:");
+	    sb.append(this.allSteps());
+	    sb.append("\n\nGiven puzzle is SOLVED!");
+	    sb.append("\nSolution took " + this.g + " steps.\n");
+	    return sb.toString();*/
+	    long solveTime = System.currentTimeMillis() - millis;
+	    StringBuilder sb = new StringBuilder();
+	    sb.append("Here are the steps to the goal state: \n");
+	    sb.append(this.allSteps());
+	    sb.append("\n\nGiven puzzle is SOLVED!");
+	    sb.append("\nSolution took " + solveTime + "ms and " + this.g + " steps.\n");
+	    return sb.toString();
 	  }
 	
   @Override

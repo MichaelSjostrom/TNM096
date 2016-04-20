@@ -93,7 +93,9 @@ public class Puzzle {
 		
 		long startTime = System.currentTimeMillis();
 
+
 		while(!queue.isEmpty()){
+			
 
 			this.currentBoard = queue.poll();
 			
@@ -112,15 +114,13 @@ public class Puzzle {
 			addToQueue(Solver.down(this.currentBoard, pos));
 			addToQueue(Solver.left(this.currentBoard, pos));
 			addToQueue(Solver.right(this.currentBoard, pos));
-			
+
 		}
 		
-		
 		System.out.println(currentBoard.toString());
+		//System.out.println("Number of steps: " + i);
 		
-		System.out.println(currentBoard.g());
-		
-
+		System.out.println(currentBoard.solutionMessage(startTime));
 		
 		System.out.println("All done");
 	}
@@ -130,7 +130,7 @@ public class Puzzle {
 			if(this.currentBoard.getNumber(i) == 0)
 				return i;
 		
-		return 1;
+		return -1;
 	}
 	
 	public static int hamming(int[] array){
