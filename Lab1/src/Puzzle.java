@@ -71,7 +71,6 @@ public class Puzzle {
 		queue.clear();
 		queue.add(this.initialBoard);
 		
-		hamming();
 		
 		while(!queue.isEmpty()){
 			
@@ -147,8 +146,9 @@ public class Puzzle {
 		input2[8] = 0;
 
 		Puzzle mPuzzle1 = new Puzzle(input1);
-
+		System.out.println(mPuzzle1.currentBoard.toString());
 		mPuzzle1.solve();
+		System.out.println(mPuzzle1.currentBoard.toString());
 
 	}
 }
