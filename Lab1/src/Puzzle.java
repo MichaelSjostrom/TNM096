@@ -33,6 +33,22 @@ public class Puzzle {
 		this.initialBoard = new Board(puzzleInput);
 		this.currentBoard = this.initialBoard;
 	}
+	
+	public boolean isSolvable() {
+		System.out.println("heeeej");
+	    int inversions = 0;
+	    int[] p = this.currentBoard.blocks;
+
+	    for(int i = 0; i < p.length - 1; i++) {
+	      for(int j = i + 1; j < p.length; j++)
+	        if(p[i] > p[j]) inversions++;
+	      if(p[i] == 0 && i % 2 == 1) inversions++;
+	    }
+	    System.out.println(inversions);
+		System.out.println("heeeej2");
+
+	    return (inversions % 2 == 0);
+	  }
 
 	public static int getHeuristic(int[] array) {
 		int size = 9;
@@ -74,10 +90,12 @@ public class Puzzle {
 	public void solve() {
 		queue.clear();
 		queue.add(this.initialBoard);
+
 		int i = 0; 
 		
 		while(!queue.isEmpty()){
 			i++;
+
 			this.currentBoard = queue.poll();
 			
 			int pos = findIndex();
@@ -85,6 +103,7 @@ public class Puzzle {
 			visited.add(currentBoard);
 			
 			if(currentBoard.isGoal()){
+				
 				System.out.println("done");
 				break;
 			}
@@ -93,13 +112,22 @@ public class Puzzle {
 			addToQueue(Solver.down(this.currentBoard, pos));
 			addToQueue(Solver.left(this.currentBoard, pos));
 			addToQueue(Solver.right(this.currentBoard, pos));
-
+	//System.out.println(currentBoard.toString());
+			
+			i++;
+		
 		}
 		
 		System.out.println(currentBoard.toString());
 		//System.out.println("Number of steps: " + i);
 		
 		System.out.println(currentBoard.solutionMessage());
+		
+		System.out.println(currentBoard.toString());
+		
+		System.out.println(currentBoard.g());
+		
+
 		
 		System.out.println("All done");
 	}
@@ -132,32 +160,37 @@ public class Puzzle {
 
 		int[] input1 = new int[9];
 
-		input1[0] = 0;
+		input1[0] = 8;
 		input1[1] = 1;
-		input1[2] = 4;
-		input1[3] = 2;
-		input1[4] = 3;
-		input1[5] = 5;
+		input1[2] = 2;
+		input1[3] = 0;
+		input1[4] = 4;
+		input1[5] = 3;
 		input1[6] = 7;
-		input1[7] = 8;
-		input1[8] = 6;
+		input1[7] = 6;
+		input1[8] = 5;
 		
 		int[] input2 = new int[9];
 
 		// Hårdkodat for now..
 		input2[0] = 1;
-		input2[1] = 2;
+		input2[1] = 0;
 		input2[2] = 3;
-		input2[3] = 4;
-		input2[4] = 5;
-		input2[5] = 6;
-		input2[6] = 7;
-		input2[7] = 8;
-		input2[8] = 0;
+		input2[3] = 2;
+		input2[4] = 4;
+		input2[5] = 5;
+		input2[6] = 6;
+		input2[7] = 7;
+		input2[8] = 8;
 
 		Puzzle mPuzzle1 = new Puzzle(input1);
-
+		if(!mPuzzle1.isSolvable()){
+			System.out.println("Is not solvable");
+			System.exit(0);
+		}
+		//System.out.println(mPuzzle1.currentBoard.toString());
 		mPuzzle1.solve();
+		//System.out.println(mPuzzle1.currentBoard.toString());
 
 	}
 }

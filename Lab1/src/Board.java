@@ -80,10 +80,6 @@ public class Board {
 	    return (p[0] == 1);
 	}
 	
-	public boolean isSolvable(){
-		return false;
-	}
-	
 	public boolean equals(Board y){
 		
 		boolean equals = true;
