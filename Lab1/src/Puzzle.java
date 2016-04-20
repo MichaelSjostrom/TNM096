@@ -38,12 +38,12 @@ public class Puzzle {
 		int size = 9;
 		int heuristic = 0;
 
-		heuristic = hamming(array);
+		//heuristic = hamming(array);
 		
-		/*for(int i = 0; i < size; i++){
+		for(int i = 0; i < size; i++){
 			if (array[i] != 0)
 				heuristic += manhattan(i, array[i]);
-		}*/
+		}
 		
 		return heuristic;
 
@@ -75,16 +75,18 @@ public class Puzzle {
 		queue.clear();
 		queue.add(this.initialBoard);
 		int i = 0; 
-		while(!queue.isEmpty() && i < 3){
+		
+		while(!queue.isEmpty()){
+			i++;
+			this.currentBoard = queue.poll();
 			
 			int pos = findIndex();
-			
-			this.currentBoard = queue.poll();
 			
 			visited.add(currentBoard);
 			
 			if(currentBoard.isGoal()){
 				System.out.println("done");
+				break;
 			}
 			
 			addToQueue(Solver.up(this.currentBoard, pos));
@@ -92,12 +94,12 @@ public class Puzzle {
 			addToQueue(Solver.left(this.currentBoard, pos));
 			addToQueue(Solver.right(this.currentBoard, pos));
 
-			System.out.println(currentBoard.toString());
-			
-			i++;
-			
 		}
 		
+		System.out.println(currentBoard.toString());
+		//System.out.println("Number of steps: " + i);
+		
+		System.out.println(currentBoard.solutionMessage());
 		
 		System.out.println("All done");
 	}
@@ -107,7 +109,7 @@ public class Puzzle {
 			if(this.currentBoard.getNumber(i) == 0)
 				return i;
 		
-		return 1;
+		return -1;
 	}
 	
 	public static int hamming(int[] array){
@@ -132,9 +134,9 @@ public class Puzzle {
 
 		input1[0] = 0;
 		input1[1] = 1;
-		input1[2] = 3;
-		input1[3] = 4;
-		input1[4] = 2;
+		input1[2] = 4;
+		input1[3] = 2;
+		input1[4] = 3;
 		input1[5] = 5;
 		input1[6] = 7;
 		input1[7] = 8;

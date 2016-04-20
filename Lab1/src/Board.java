@@ -44,10 +44,10 @@ public class Board {
 		blocks[pos] = newVal;
 		blocks[newPos] = 0;
 		
-		this.g = b.g;
+		this.g = b.g + 1;
 		this.h = Puzzle.getHeuristic(this.blocks);
 		
-		this.prev = b;
+		//this.prev = b;
 		
 	}
 	
@@ -161,6 +161,27 @@ public class Board {
 	  public int f() {
 	    return g() + h();
 	  }
+	  
+	  public String allSteps() {
+		    StringBuilder sb = new StringBuilder();
+		    if (this.prev != null) sb.append(prev.allSteps());
+		    sb.append(this.toString());
+		    return sb.toString();
+		  }
+
+		  /**
+		   * This method creates a solution message for when the
+		   * puzzle has been solved using a StringBuilder.
+		   * @return String - The solution message.
+		   */
+		  public String solutionMessage() {
+		    StringBuilder sb = new StringBuilder();
+		    sb.append("Here are the steps to the goal state:");
+		    sb.append(this.allSteps());
+		    sb.append("\n\nGiven puzzle is SOLVED!");
+		    sb.append("\nSolution took " + this.g + " steps.\n");
+		    return sb.toString();
+		  }
 	
   @Override
   public boolean equals(Object o) {
