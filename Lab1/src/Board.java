@@ -17,6 +17,8 @@ public class Board {
 
 	private List<Board> neighbors;
 	
+	private Board prev;
+	
 	//Temp solution for size
 	private final int size = 9;
 	
@@ -28,8 +30,7 @@ public class Board {
 	
 	public Board(int[] blocks){
 		this.blocks = blocks;
-		
-		
+		this.prev = null;
 	    this.g = 0;
 	    //TODO implement getHeurustic
 	    this.h = Puzzle.getHeuristic(this.blocks);
@@ -39,8 +40,14 @@ public class Board {
 		
 		this.blocks = Arrays.copyOf(b.blocks, b.blocks.length);
 		int newVal = blocks[newPos];
+		
 		blocks[pos] = newVal;
 		blocks[newPos] = 0;
+		
+		this.g = b.g;
+		this.h = Puzzle.getHeuristic(this.blocks);
+		
+		this.prev = b;
 		
 	}
 	

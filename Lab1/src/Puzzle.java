@@ -62,8 +62,11 @@ public class Puzzle {
 	 * @param nextState
 	 */
 	private void addToQueue(Board nextBoard) {
-		if (nextBoard != null && !this.visited.contains(nextBoard))
+		if (nextBoard != null && !this.visited.contains(nextBoard)){
+			
 			this.queue.add(nextBoard);
+		}
+			
 	}
 	
 	
@@ -71,9 +74,9 @@ public class Puzzle {
 	public void solve() {
 		queue.clear();
 		queue.add(this.initialBoard);
-		
-		while(!queue.isEmpty()){
-			System.out.println("going");
+		int i = 0; 
+		while(!queue.isEmpty() && i < 3){
+			
 			int pos = findIndex();
 			
 			this.currentBoard = queue.poll();
@@ -88,10 +91,13 @@ public class Puzzle {
 			addToQueue(Solver.down(this.currentBoard, pos));
 			addToQueue(Solver.left(this.currentBoard, pos));
 			addToQueue(Solver.right(this.currentBoard, pos));
-			break;
+
+			System.out.println(currentBoard.toString());
+			
+			i++;
+			
 		}
 		
-		System.out.println(currentBoard.toString());
 		
 		System.out.println("All done");
 	}
