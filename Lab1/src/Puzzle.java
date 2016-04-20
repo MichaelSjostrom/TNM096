@@ -35,7 +35,7 @@ public class Puzzle {
 	}
 	
 	public boolean isSolvable() {
-		System.out.println("heeeej");
+
 	    int inversions = 0;
 	    int[] p = this.currentBoard.blocks;
 
@@ -44,8 +44,6 @@ public class Puzzle {
 	        if(p[i] > p[j]) inversions++;
 	      if(p[i] == 0 && i % 2 == 1) inversions++;
 	    }
-	    System.out.println(inversions);
-		System.out.println("heeeej2");
 
 	    return (inversions % 2 == 0);
 	  }
@@ -90,8 +88,11 @@ public class Puzzle {
 	public void solve() {
 		queue.clear();
 		queue.add(this.initialBoard);
+		
+		System.out.println(initialBoard.toString());
+		
+		long startTime = System.currentTimeMillis();
 
-		int i = 0; 
 		while(!queue.isEmpty()){
 
 			this.currentBoard = queue.poll();
@@ -103,6 +104,7 @@ public class Puzzle {
 			if(currentBoard.isGoal()){
 				
 				System.out.println("done");
+				//System.out.println(startTime);
 				break;
 			}
 			
@@ -110,10 +112,6 @@ public class Puzzle {
 			addToQueue(Solver.down(this.currentBoard, pos));
 			addToQueue(Solver.left(this.currentBoard, pos));
 			addToQueue(Solver.right(this.currentBoard, pos));
-
-			//System.out.println(currentBoard.toString());
-			
-			i++;
 			
 		}
 		
@@ -156,14 +154,14 @@ public class Puzzle {
 		int[] input1 = new int[9];
 
 		input1[0] = 8;
-		input1[1] = 1;
-		input1[2] = 2;
-		input1[3] = 0;
-		input1[4] = 4;
-		input1[5] = 3;
-		input1[6] = 7;
-		input1[7] = 6;
-		input1[8] = 5;
+		input1[1] = 6;
+		input1[2] = 7;
+		input1[3] = 2;
+		input1[4] = 5;
+		input1[5] = 4;
+		input1[6] = 3;
+		input1[7] = 0;
+		input1[8] = 1;
 		
 		int[] input2 = new int[9];
 

@@ -166,4 +166,9 @@ public class Board {
     Board board = (Board) o;
     return Arrays.equals(blocks, board.blocks);
   }
+  
+  @Override
+  public int hashCode() {
+    return Arrays.hashCode(blocks);
+  }
 }
