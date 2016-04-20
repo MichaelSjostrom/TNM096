@@ -18,7 +18,7 @@ public class Board {
 	private List<Board> neighbors;
 	
 	//Temp solution for size
-	private int size = 9;
+	private final int size = 9;
 	
 	/** The number of moves since the start. */
 	private int g;

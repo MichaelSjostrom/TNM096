@@ -44,6 +44,24 @@ public class Puzzle {
 		 */
 		return heuristic;
 	}
+	
+	public int manhattan(Board board){
+		int size = board.blocks.length;
+		int outOfPlace = 0;
+		
+		for(int i = 0; i < size; i++){
+			if(board.blocks[i] != i+1 && board.blocks[i] != 0){
+				for(int j = 1; j < size + 1; j++){
+					if(board.blocks[i] == j){
+						if(i > j) 
+							
+					}
+				}
+			}
+		}
+		
+		return 0;
+	}
 
 	/**
 	 * This method handles adding the next state to the queue. It will only add
@@ -56,6 +74,8 @@ public class Puzzle {
 		if (nextBoard != null && !this.visited.contains(nextBoard))
 			this.queue.add(nextBoard);
 	}
+	
+	
 
 	public void solve() {
 		queue.clear();
