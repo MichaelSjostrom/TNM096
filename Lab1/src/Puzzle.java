@@ -35,17 +35,23 @@ public class Puzzle {
 	}
 
 	public static int getHeuristic(int[] array) {
+		int size = 9;
 		int heuristic = 0;
 
-		// TODO Implement our distanceFunction
-		/*
-		 * for(int i = 0; i < array.length; i++) { if (array[i] != 0) heuristic
-		 * += getManhattanDistance(i, array[i]); }
-		 */
-		
 		heuristic = hamming(array);
 		
+		/*for(int i = 0; i < size; i++){
+			if (array[i] != 0)
+				heuristic += manhattan(i, array[i]);
+		}*/
+		
 		return heuristic;
+
+	}
+	
+	public static int manhattan(int index, int value){			
+		return Math.abs((index / 3) - ((value-1) / 3)) + Math.abs((index % 3) - ((value-1) % 3));
+
 	}
 
 	/**
@@ -59,6 +65,8 @@ public class Puzzle {
 		if (nextBoard != null && !this.visited.contains(nextBoard))
 			this.queue.add(nextBoard);
 	}
+	
+	
 
 	public void solve() {
 		queue.clear();
