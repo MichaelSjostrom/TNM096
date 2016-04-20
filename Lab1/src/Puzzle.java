@@ -61,13 +61,27 @@ public class Puzzle {
 		queue.clear();
 		queue.add(this.initialBoard);
 		
-		int pos = findIndex();
 		
-		Solver.up(this.currentBoard, pos);
-		Solver.down(this.currentBoard, pos);
-		Solver.left(this.currentBoard, pos);
-		Solver.right(this.currentBoard, pos);
+		while(!queue.isEmpty()){
+			
+			int pos = findIndex();
+			
+			this.currentBoard = queue.poll();
+			
+			visited.add(currentBoard);
+			
+			if(currentBoard.isGoal()){
+				System.out.println("done");
+			}
+			
+			addToQueue(Solver.up(this.currentBoard, pos));
+			addToQueue(Solver.down(this.currentBoard, pos));
+			addToQueue(Solver.left(this.currentBoard, pos));
+			addToQueue(Solver.right(this.currentBoard, pos));
 		
+		}
+		
+		System.out.println("All done");
 	}
 	
 	public int findIndex(){
