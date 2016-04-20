@@ -42,25 +42,22 @@ public class Puzzle {
 		 * for(int i = 0; i < array.length; i++) { if (array[i] != 0) heuristic
 		 * += getManhattanDistance(i, array[i]); }
 		 */
+		
+		
 		return heuristic;
 	}
 	
-	public int manhattan(Board board){
-		int size = board.blocks.length;
-		int outOfPlace = 0;
+	public static int manhattan(int index, int value){
+		int size = 9;
+		int distance = 0;
 		
 		for(int i = 0; i < size; i++){
-			if(board.blocks[i] != i+1 && board.blocks[i] != 0){
-				for(int j = 1; j < size + 1; j++){
-					if(board.blocks[i] == j){
-						if(i > j) 
-							
-					}
-				}
+			if(value != 0){
+				distance = Math.abs((i / 3) - ((board.blocks[i]-1) / 3)) + Math.abs((i % 3) - ((board.blocks[i]-1) % 3));
 			}
 		}
 		
-		return 0;
+		return distance;
 	}
 
 	/**
