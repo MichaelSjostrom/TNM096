@@ -45,7 +45,7 @@ public class Puzzle {
 		
 		heuristic = hamming(array);
 		
-		return heurisitic;
+		return heuristic;
 	}
 
 	/**
@@ -64,10 +64,8 @@ public class Puzzle {
 		queue.clear();
 		queue.add(this.initialBoard);
 		
-		hamming();
-		
 		while(!queue.isEmpty()){
-			
+			System.out.println("going");
 			int pos = findIndex();
 			
 			this.currentBoard = queue.poll();
@@ -84,6 +82,8 @@ public class Puzzle {
 			addToQueue(Solver.right(this.currentBoard, pos));
 			break;
 		}
+		
+		System.out.println(currentBoard.toString());
 		
 		System.out.println("All done");
 	}
