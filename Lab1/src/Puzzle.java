@@ -167,14 +167,14 @@ public class Puzzle {
 
 		// Hårdkodat for now..
 		input2[0] = 1;
-		input2[1] = 0;
+		input2[1] = 2;
 		input2[2] = 3;
-		input2[3] = 2;
-		input2[4] = 4;
+		input2[3] = 4;
+		input2[4] = 0;
 		input2[5] = 5;
-		input2[6] = 6;
-		input2[7] = 7;
-		input2[8] = 8;
+		input2[6] = 7;
+		input2[7] = 8;
+		input2[8] = 6;
 
 		Puzzle mPuzzle1 = new Puzzle(input1);
 		if(!mPuzzle1.isSolvable()){
