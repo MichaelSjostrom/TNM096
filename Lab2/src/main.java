@@ -1,9 +1,21 @@
+//AND = \
+//OR = /
+//NOT = -
 
 public class main {
 	
+	
 	public static String removeOpposite(String part, String cl){
-		
-		String tempCl = cl.replace(part, "");
+		String tempCl = "";
+		if(part.length() == 2 && cl.indexOf(part.substring(1)) == cl.length()-1){
+			
+			tempCl = cl.substring(0, cl.length() - 3);
+		}
+		//Måste fixa så om part är mitt i eller i början av cl
+		//så ska ven efterkommande tecken tas bort.
+		else{
+			tempCl = cl.replace(part, "");
+		}
 		
 		return tempCl;
 	}
@@ -33,36 +45,25 @@ public class main {
 	
 	public static String[] findResolvent(String cl1, String cl2){
 		String resolvent[] = {"", ""};
-		
-		String check1 = "";
-		String check2 = "";
 
 		String first = cl1;
 		String second = cl2;
 		
-		check1 = checkIfNOT(first);
-		check2 = checkIfNOT(second);
+		String check1 = checkIfNOT(first);
+		String check2 = checkIfNOT(second);
 		
 		if(check1 != "" && checkIfOpposite(check1, second)){
 			String tempPart = check1.substring(1);
-			System.out.println("tempPart = " + tempPart);
+			
 			first = removeOpposite(check1, first);
 			second = removeOpposite(tempPart, second);
-			
-			
-			System.out.println("first = " + first);
-			System.out.println("second = " + second);
 		}
 		else if(check2 != "" && checkIfOpposite(check2, first)){
 			String tempPart = check2.substring(1);
-			System.out.println("tempPart = " + tempPart);
-			
 			
 			first = removeOpposite(tempPart, first);
 			second = removeOpposite(check2, second);
 			
-			System.out.println("first = " + first);
-			System.out.println("second = " + second);
 		}
 		
 		resolvent[0] = first;
@@ -73,8 +74,8 @@ public class main {
 	
 	public static void main(String[] args) {
 		
-		String list1 = "A OR B OR C";
-		String list2 = "-B OR A OR Q";
+		String list1 = "A/B/C";
+		String list2 = "B/A/-C";
 		String result[] = {""};
 
 		result = findResolvent(list1, list2);
