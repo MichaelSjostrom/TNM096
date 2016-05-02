@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class main {
@@ -45,19 +46,22 @@ public class main {
 		}
 	}
 	
-	
+	//Reurns the resolvent of Clause1 and Clause2
 	public static ArrayList<Clause> getResolvents(Clause clause1, Clause clause2){
 		
 		Clause clause1copy = new Clause(clause1.getLiterals());
 		Clause clause2copy = new Clause(clause2.getLiterals());
 		
-		for(int i = 0; i<clause1.getLiterals().size(); i++){
-			for(int j = 0; j<clause2.getLiterals().size(); j++){
-				if(clause1.getLiterals().get(i).equals(clause2.getLiterals().get(j)) && clause1.getLiterals().get(i).contains("-")){
-					clause1copy.getLiterals().remove(clause1.getLiterals().get(i));
-					clause2copy.getLiterals().remove(clause2.getLiterals().get(j));
-				}
-			}
+		for (Iterator<String> iterator1 = clause1copy.getLiterals().iterator(); iterator1.hasNext();) {
+		    String string1 = iterator1.next();
+		    for (Iterator<String> iterator2 = clause2copy.getLiterals().iterator(); iterator2.hasNext();){
+		    	String string2 = iterator2.next();
+			    if (string1.equals(string2) && string1.contains("-")) {
+			        // Remove the current element from the iterator and the list.
+			        iterator1.remove();
+			        iterator2.remove();
+			    }
+		    }
 		}
 		
 		ArrayList<Clause> result = new ArrayList<Clause>();
