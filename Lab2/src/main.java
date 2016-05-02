@@ -35,37 +35,38 @@ public class main {
 		listOfClauses.add(clause3);
 		
 		ArrayList<Clause> KB = new ArrayList<Clause>();
-		
+		int k = 0;
+		//while(k < 50){
 		for(int i = 0, len = listOfClauses.size(); i < len - 1; ++i){
 			for(int j = i + 1; j < len; ++j){
 				Clause s = listOfClauses.get(i);
 				Clause s2 = listOfClauses.get(j);
 				Clause negCop = makeNegative(s);
-				System.out.println("before");
-				ArrayList<Clause> result = getResolvents(negCop, s2);
+				Clause result = getResolvents(negCop, s2);
 				
-				for(Clause c : result){
-					if(c.getLiterals().isEmpty()) {
-						KB.add(c);
-						System.out.println("All Done");
-						break;
-					}
-					if(!KB.contains(c))
-						KB.add(c);
+				if(result.getLiterals().isEmpty()){
+					KB.add(result);
+					System.out.println("All Done");
+					break;
 				}
+				if(!KB.contains(result)) KB.add(result);
+				
 					
 			}
 		}
-		
-		for(Clause s : KB)
-				System.out.println(s.getLiterals());
-		
+		//k++;
+		//}
+	
+		for(Clause s : KB){
+			System.out.println(s.getLiterals());
+		}
+			
 		System.exit(0);
 		
 	}
 	
 	//Reurns the resolvent of Clause1 and Clause2
-	public static ArrayList<Clause> getResolvents(Clause clause1, Clause clause2){
+	public static Clause getResolvents(Clause clause1, Clause clause2){
 		
 		Clause clause1copy = new Clause(clause1.getLiterals());
 		Clause clause2copy = new Clause(clause2.getLiterals());
@@ -82,11 +83,17 @@ public class main {
 		    }
 		}
 		
-		ArrayList<Clause> result = new ArrayList<Clause>();
-		result.add(makeNegative(clause1copy));
-		result.add(clause2copy);
+		ArrayList<String> temp = new ArrayList<String>();
+		clause1copy = makeNegative(clause1copy);
+		for(String s : clause1copy.getLiterals()){
+			temp.add(s);
+		}
+		for(String s : clause2copy.getLiterals()){
+			if(!temp.contains(s))
+				temp.add(s);
+		}
 		
-		return result;
+		return new Clause(temp);
 	}
 	
 	//Take the negative value of the hole array
