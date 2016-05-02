@@ -18,6 +18,10 @@ public class Clause {
 	
 	@Override
 	public boolean equals(Object c){
+		if(c instanceof String){
+			System.out.println("here i am");
+			if(c == this) return true;
+		}
 		
 		if(c instanceof Clause){
 			Clause test = (Clause)c;
@@ -29,6 +33,7 @@ public class Clause {
 			return true;
 			
 		}
+		
 		return false;
 	}
 

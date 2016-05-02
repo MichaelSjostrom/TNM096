@@ -41,18 +41,21 @@ public class main {
 				Clause s = listOfClauses.get(i);
 				Clause s2 = listOfClauses.get(j);
 				Clause negCop = makeNegative(s);
-				
+				System.out.println("before");
 				ArrayList<Clause> result = getResolvents(negCop, s2);
 				
 				for(Clause c : result){
+					if(c.getLiterals().isEmpty()) {
+						KB.add(c);
+						System.out.println("All Done");
+						break;
+					}
 					if(!KB.contains(c))
 						KB.add(c);
 				}
 					
 			}
 		}
-		
-		
 		
 		for(Clause s : KB)
 				System.out.println(s.getLiterals());
@@ -71,8 +74,10 @@ public class main {
 		    String string1 = iterator1.next();
 		    for (Iterator<String> iterator2 = clause2copy.getLiterals().iterator(); iterator2.hasNext();){
 		    	String string2 = iterator2.next();
-		    	//If clauses contains the same values and it is "NOT", remove from both clauses.
-			    if (string1.equals(string2) && string1.contains("-")) {
+		    	
+		    	//If clauses contains the same values.
+			    if (string1.equals(string2)) {
+
 			        // Remove the current element from the iterator and the list.
 			        iterator1.remove();
 			        iterator2.remove();
