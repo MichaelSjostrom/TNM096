@@ -6,6 +6,9 @@ public class main {
 	private static String[] literals;
 	private static String[] literals2;
 	
+	private static int[] nots;
+	private static int[] nots2;
+	
 	public static void main(String[] args) {
 		
 		String[] clauses = {"notC!&B", "notA!&notB"};
@@ -29,7 +32,37 @@ public class main {
 		
 		checkAndOr(c1, c2);
 		
-		int[] nots = new int[literals.length], nots2 = new int[literals2.length];
+		nots = new int[literals.length];
+		nots2 = new int[literals2.length];
+		
+		checkForNots();
+		
+		remove();
+		
+		for(int i = 0, len = literals.length; i < len; ++i){
+			System.out.println(literals[i]);
+		}
+		for(int i = 0, len = literals2.length; i < len; ++i){
+			System.out.println(literals2[i]);
+		}
+		
+		return false;
+	}
+	
+	private static void remove() {
+		for(int i = 0, len = literals.length; i < len; ++i){
+			for(int j = 0, len2 = literals2.length; j < len2; ++j){
+				if(literals[i].equals(literals2[j])){
+					if(nots[i] != nots2[j]){
+						literals[i] = "";
+						literals2[j] = "";
+					}
+				}
+			}
+		}
+	}
+
+	private static void checkForNots() {
 		
 		for(int i = 0, len = literals.length; i < len; ++i){
 			if(isNegative(literals[i]))
@@ -48,35 +81,10 @@ public class main {
 				literals2[i] = literals2[i].split("not")[1];
 			}
 		}
+
 		
-		int[] remove = new int[literals.length];
-		int[] remove2 = new int[literals2.length];
-		
-		for(int i = 0, len = literals.length; i < len; ++i){
-			for(int j = 0, len2 = literals2.length; j < len2; ++j){
-				if(literals[i].equals(literals2[j])){
-					if(nots[i] != nots2[j]){
-						literals[i] = "";
-						literals2[j] = "";
-					}
-					else{
-						remove[i] = 1;
-						remove2[j] = 1;
-					}
-				}
-			}
-		}
-		
-		for(int i = 0, len = literals.length; i < len; ++i){
-			System.out.println(literals[i]);
-		}
-		for(int i = 0, len = literals2.length; i < len; ++i){
-			System.out.println(literals2[i]);
-		}
-		
-		return false;
 	}
-	
+
 	private static void checkAndOr(String c1, String c2) {
 		
 		String and = "&", or = "!" + and;
