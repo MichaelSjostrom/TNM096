@@ -9,41 +9,53 @@ public class main {
 		
 		List<String> c1 = new ArrayList<String>();
 		List<String> c2 = new ArrayList<String>();
+		List<String> c3 = new ArrayList<String>();
 
 		
 		c1.add("-A");
 		c1.add("B");
-		c1.add("K");
+		c1.add("C");
 		
 		c2.add("A");
-		c2.add("C");
-		c2.add("-K");
+		c2.add("D");
+		c2.add("-C");
+		
+		c3.add("A");
+		c3.add("-D");
+		c3.add("C");
 		
 		List<Clause> listOfClauses = new ArrayList<Clause>();
 
 		Clause clause1 = new Clause(c1);
 		Clause clause2 = new Clause(c2);
+		Clause clause3 = new Clause(c3);
 		
 		listOfClauses.add(clause1);
 		listOfClauses.add(clause2);
+		listOfClauses.add(clause3);
+		
+		ArrayList<Clause> KB = new ArrayList<Clause>();
 		
 		for(int i = 0, len = listOfClauses.size(); i < len - 1; ++i){
-			Clause s = listOfClauses.get(i);
-			Clause s2 = listOfClauses.get(i + 1);
-			Clause negCop = makeNegative(s);
-			
-			ArrayList<Clause> result = getResolvents(negCop, s2);
-			
-			System.out.println("Result(0) = " + result.get(0).getLiterals());
-			System.out.println("Result(1) = " + result.get(1).getLiterals());
-			
-		}
-		
-		for(Clause s : listOfClauses){
-			for(String k : s.getLiterals()){
-				System.out.println(k);
+			for(int j = i, len2 = listOfClauses.size(); j < len2; ++j){
+				Clause s = listOfClauses.get(i);
+				Clause s2 = listOfClauses.get(j);
+				Clause negCop = makeNegative(s);
+				
+				ArrayList<Clause> result = getResolvents(negCop, s2);
+				
+				for(Clause c : result){
+					KB.add(c);
+				}
+					
 			}
 		}
+		
+		
+		
+		for(Clause s : KB)
+				System.out.println(s.getLiterals());
+		
 	}
 	
 	//Reurns the resolvent of Clause1 and Clause2
