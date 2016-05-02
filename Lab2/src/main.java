@@ -31,7 +31,7 @@ public class main {
 			Clause s2 = listOfClauses.get(i + 1);
 			Clause negCop = makeNegative(s);
 			
-			ArrayList<Clause> result = removeOpposites(negCop, s2);
+			ArrayList<Clause> result = getResolvents(negCop, s2);
 			
 			System.out.println("Result(0) = " + result.get(0).getLiterals());
 			System.out.println("Result(1) = " + result.get(1).getLiterals());
@@ -46,7 +46,7 @@ public class main {
 	}
 	
 	
-	public static ArrayList<Clause> removeOpposites(Clause clause1, Clause clause2){
+	public static ArrayList<Clause> getResolvents(Clause clause1, Clause clause2){
 		
 		Clause clause1copy = new Clause(clause1.getLiterals());
 		Clause clause2copy = new Clause(clause2.getLiterals());
