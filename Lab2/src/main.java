@@ -3,6 +3,9 @@ import java.util.List;
 
 public class main {
 	
+	private static String[] literals;
+	private static String[] literals2;
+	
 	public static void main(String[] args) {
 		
 		String[] clauses = {"notC!&B", "notA!&notB"};
@@ -24,23 +27,7 @@ public class main {
 
 	private static boolean check(String c1, String c2) {
 		
-		String and = "&", or = "!" + and;
-		
-		String splitter;
-		
-		if(c1.contains(or)) 
-			splitter = or;
-		else splitter = and;
-		
-		String[] literals = c1.split(splitter);
-		
-		String splitter2;
-		
-		if(c2.contains(or)) 
-			splitter2 = or;
-		else splitter2 = and;
-		
-		String[] literals2 = c2.split(splitter2);
+		checkAndOr(c1, c2);
 		
 		int[] nots = new int[literals.length], nots2 = new int[literals2.length];
 		
@@ -90,6 +77,29 @@ public class main {
 		return false;
 	}
 	
+	private static void checkAndOr(String c1, String c2) {
+		
+		String and = "&", or = "!" + and;
+		
+		String splitter;
+		
+		if(c1.contains(or)) 
+			splitter = or;
+		else splitter = and;
+		
+		literals = c1.split(splitter);
+		
+		String splitter2;
+		
+		if(c2.contains(or)) 
+			splitter2 = or;
+		else splitter2 = and;
+		
+		literals2 = c2.split(splitter2);
+		
+		
+	}
+
 	private static boolean isNegative(String splitMe){
 		
 		if(splitMe.contains("not")){
