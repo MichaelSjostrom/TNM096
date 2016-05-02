@@ -1,36 +1,51 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 public class main {
 	
 	public static void main(String[] args) {
 		
-		String[] c1 = {"-A", "B"};
-		String[] c2 = {"A", "C"};
-		Collection<String> clause1;
-		Collection<String> clause2;
+		List<String> c1 = new ArrayList<String>();
+		List<String> c2 = new ArrayList<String>();
 		
-		makeNegative(c1);
+		c1.add("-A");
+		c1.add("B");
+		c2.add("A");
+		c2.add("C");
 		
-		clause1 = new ArrayList(Arrays.asList(c1));
-		clause2 = new ArrayList(Arrays.asList(c2));
+		List<Clause> listOfClauses = new ArrayList<Clause>();
 		
-		for(String s : clause1){
-			System.out.println(s);
+		Clause clause1 = new Clause(c1);
+		Clause clause2 = new Clause(c2);
+		
+		listOfClauses.add(clause1);
+		listOfClauses.add(clause2);
+		
+		makeNegative(clause1);
+		
+		for(Clause s : listOfClauses){
+			for(String k : s.getLiterals()){
+				System.out.println(k);
+			}
 		}
 	}
 	
 	//Take the negative value of the hole array
-	private static void makeNegative(String[] c1) {
-		for(int i = 0, len = c1.length; i < len; ++i){
-			if(!c1[i].contains("-")) {
-				c1[i] = "-" + c1[i];
+	private static void makeNegative(Clause c1) {
+		List<String> temp = new ArrayList<String>();
+		for(String s : c1.getLiterals()){
+			String k = "";
+			if(!s.contains("-")) {
+				k = "-" + s;
 			}
 			else {
-				c1[i] = c1[i].replace("-", "");
+				k = s.replace("-", "");
 			}
+			temp.add(k);
 		}
+		c1.setLiterals(temp);
 	}
 	
 	
