@@ -39,16 +39,28 @@ public class main {
 		
 		remove();
 		
-		for(int i = 0, len = literals.length; i < len; ++i){
-			System.out.println(literals[i]);
-		}
-		for(int i = 0, len = literals2.length; i < len; ++i){
-			System.out.println(literals2[i]);
-		}
+		printFun();
 		
 		return false;
 	}
 	
+	private static void printFun() {
+		
+		for(int i = 0, len = literals.length; i < len; ++i){
+			String s = "";
+			if(nots[i] == 0) s += "not"; 
+			
+			System.out.println(s + literals[i]);
+		}
+		for(int i = 0, len = literals2.length; i < len; ++i){
+			String s = "";
+			if(nots[i] == 0) s += "not";
+			
+			System.out.println(s + literals2[i]);
+		}
+		
+	}
+
 	private static void remove() {
 		for(int i = 0, len = literals.length; i < len; ++i){
 			for(int j = 0, len2 = literals2.length; j < len2; ++j){
