@@ -19,9 +19,9 @@ public class main {
 		for(String s : clause1){
 			System.out.println(s);
 		}
-		
 	}
-
+	
+	//Take the negative value of the hole array
 	private static void makeNegative(String[] c1) {
 		for(int i = 0, len = c1.length; i < len; ++i){
 			if(!c1[i].contains("-")) {
