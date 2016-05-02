@@ -1,131 +1,144 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class main {
 	
-	private static String[] literals;
-	private static String[] literals2;
-	
-	private static int[] nots;
-	private static int[] nots2;
-	
 	public static void main(String[] args) {
 		
-		String[] clauses = {"notC!&B", "notA!&notB"};
-		Boolean running = true;
 		
-		while(true){
-			for(int i = 0, len = clauses.length; i < len; ++i){
-				for(int j = i + 1, len2 = clauses.length; j < len2; ++j){
-					check(clauses[i], clauses[j]);
-				}
-				
-			}
-			break;
-		}
-		
-		System.out.println("done");
-		System.exit(0);
-	}
+		List<String> c1 = new ArrayList<String>();
+		List<String> c2 = new ArrayList<String>();
+		List<String> c3 = new ArrayList<String>();
 
-	private static boolean check(String c1, String c2) {
 		
-		checkAndOr(c1, c2);
+		/*c1.add("-A");
+		c1.add("B");
+		c1.add("C");
 		
-		nots = new int[literals.length];
-		nots2 = new int[literals2.length];
+		c2.add("A");
+		c2.add("D");
+		c2.add("-C");
 		
-		checkForNots();
+		c3.add("A");
+		c3.add("-D");
+		c3.add("C");*/
 		
-		remove();
+		c1.add("A");
+		c1.add("B");
+		c1.add("C");
 		
-		printFun();
+		c2.add("A");
+		c2.add("B");
+		c2.add("C");
 		
-		return false;
-	}
-	
-	private static void printFun() {
+		c3.add("A");
+		c3.add("B");
+		c3.add("C");
 		
-		for(int i = 0, len = literals.length; i < len; ++i){
-			String s = "";
-			if(nots[i] == 0) s += "not"; 
-			
-			System.out.println(s + literals[i]);
-		}
-		for(int i = 0, len = literals2.length; i < len; ++i){
-			String s = "";
-			if(nots[i] == 0) s += "not";
-			
-			System.out.println(s + literals2[i]);
-		}
-		
-	}
+		List<Clause> listOfClauses = new ArrayList<Clause>();
 
-	private static void remove() {
-		for(int i = 0, len = literals.length; i < len; ++i){
-			for(int j = 0, len2 = literals2.length; j < len2; ++j){
-				if(literals[i].equals(literals2[j])){
-					if(nots[i] != nots2[j]){
-						literals[i] = "";
-						literals2[j] = "";
+		Clause clause1 = new Clause(c1);
+		Clause clause2 = new Clause(c2);
+		Clause clause3 = new Clause(c3);
+		
+		listOfClauses.add(clause1);
+		listOfClauses.add(clause2);
+		listOfClauses.add(clause3);
+		
+		ArrayList<Clause> KB = new ArrayList<Clause>();
+		int k = 0;
+		int max = 50;
+		while(k < max){
+			for(int i = 0, len = listOfClauses.size(); i < len - 1; ++i){
+				for(int j = i + 1; j < len; ++j){
+					Clause s = listOfClauses.get(i);
+					Clause s2 = listOfClauses.get(j);
+					
+					Clause negCop = makeNegative(s);
+					Clause result = getResolvents(negCop, s2);
+					
+					if(result.getLiterals().isEmpty()){
+						KB.add(result);
+						System.out.println("Found empty");
+						break;
 					}
+					if(!KB.contains(result)) {
+						KB.add(result);
+						listOfClauses.add(result);
+					}else{
+						//TODO: this should not be done like this
+						// should test all new clauses
+						
+						//System.out.println(result.getLiterals());
+						//System.out.println("Not solvable");
+						k = max;
+						break;
+
+					}
+					
 				}
 			}
+			k++;
 		}
-	}
-
-	private static void checkForNots() {
-		
-		for(int i = 0, len = literals.length; i < len; ++i){
-			if(isNegative(literals[i]))
-				nots[i] = 1;
-			else {
-				nots[i] = 0;
-				literals[i] = literals[i].split("not")[1];
-			}
+		System.out.println("=======>>>");
+		for(Clause s : KB){
+			System.out.println(s.getLiterals());
 		}
+			
+		System.exit(0);
 		
-		for(int i = 0, len = literals2.length; i < len; ++i){
-			if(isNegative(literals2[i]))
-				nots2[i] = 1;
-			else {
-				nots2[i] = 0;
-				literals2[i] = literals2[i].split("not")[1];
-			}
-		}
-
-		
-	}
-
-	private static void checkAndOr(String c1, String c2) {
-		
-		String and = "&", or = "!" + and;
-		
-		String splitter;
-		
-		if(c1.contains(or)) 
-			splitter = or;
-		else splitter = and;
-		
-		literals = c1.split(splitter);
-		
-		String splitter2;
-		
-		if(c2.contains(or)) 
-			splitter2 = or;
-		else splitter2 = and;
-		
-		literals2 = c2.split(splitter2);
-		
-		
-	}
-
-	private static boolean isNegative(String splitMe){
-		
-		if(splitMe.contains("not")){
-			return false;
-		}
-		return true;
 	}
 	
+	//Reurns the resolvent of Clause1 and Clause2
+	public static Clause getResolvents(Clause clause1, Clause clause2){
+		
+		Clause clause1copy = new Clause(clause1.getLiterals());
+		Clause clause2copy = new Clause(clause2.getLiterals());
+		
+		
+		for (Iterator<String> iterator1 = clause1copy.getLiterals().iterator(); iterator1.hasNext();) {
+		    String string1 = iterator1.next();
+		    for (Iterator<String> iterator2 = clause2copy.getLiterals().iterator(); iterator2.hasNext();){
+		    	String string2 = iterator2.next();
+		    	
+		    	//If clauses contains the same values.
+			    if (string1.equals(string2)) {
+
+			        // Remove the current element from the iterator and the list.
+			        iterator1.remove();
+			        iterator2.remove();
+			    }
+		    }
+		}
+		
+		ArrayList<String> temp = new ArrayList<String>();
+		clause1copy = makeNegative(clause1copy);
+		for(String s : clause1copy.getLiterals()){
+			temp.add(s);
+		}
+		for(String s : clause2copy.getLiterals()){
+			if(!temp.contains(s))
+				temp.add(s);
+		}
+		
+		return new Clause(temp);
+	}
+	
+	//Take the negative value of the hole array
+	private static Clause makeNegative(Clause c1) {
+		List<String> temp = new ArrayList<String>();
+		for(String s : c1.getLiterals()){
+			String k = "";
+			if(!s.contains("-")) {
+				k = "-" + s;
+			}
+			else {
+				k = s.replace("-", "");
+			}
+			temp.add(k);
+		}
+		
+		return new Clause(temp);
+	}
 }
