@@ -71,6 +71,7 @@ public class main {
 		    String string1 = iterator1.next();
 		    for (Iterator<String> iterator2 = clause2copy.getLiterals().iterator(); iterator2.hasNext();){
 		    	String string2 = iterator2.next();
+		    	//If clauses contains the same values and it is "NOT", remove from both clauses.
 			    if (string1.equals(string2) && string1.contains("-")) {
 			        // Remove the current element from the iterator and the list.
 			        iterator1.remove();
