@@ -1,6 +1,4 @@
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 
 public class main {
@@ -23,7 +21,10 @@ public class main {
 		listOfClauses.add(clause1);
 		listOfClauses.add(clause2);
 		
-		makeNegative(clause1);
+		for(int i = 0, len = listOfClauses.size(); i < len - 1; ++i){
+			Clause s = listOfClauses.get(i);
+			makeNegative(s);
+		}
 		
 		for(Clause s : listOfClauses){
 			for(String k : s.getLiterals()){
@@ -47,8 +48,4 @@ public class main {
 		}
 		c1.setLiterals(temp);
 	}
-	
-	
-	
-	
 }
