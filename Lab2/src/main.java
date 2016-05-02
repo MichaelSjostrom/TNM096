@@ -37,7 +37,7 @@ public class main {
 		ArrayList<Clause> KB = new ArrayList<Clause>();
 		
 		for(int i = 0, len = listOfClauses.size(); i < len - 1; ++i){
-			for(int j = i; j < len; ++j){
+			for(int j = i + 1; j < len; ++j){
 				Clause s = listOfClauses.get(i);
 				Clause s2 = listOfClauses.get(j);
 				Clause negCop = makeNegative(s);
@@ -81,7 +81,7 @@ public class main {
 		}
 		
 		ArrayList<Clause> result = new ArrayList<Clause>();
-		result.add(clause1copy);
+		result.add(makeNegative(clause1copy));
 		result.add(clause2copy);
 		
 		return result;
