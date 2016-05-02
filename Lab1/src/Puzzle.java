@@ -52,12 +52,12 @@ public class Puzzle {
 		int size = 9;
 		int heuristic = 0;
 
-		heuristic = hamming(array);
+		//heuristic = hamming(array);
 		
-		/*for(int i = 0; i < size; i++){
+		for(int i = 0; i < size; i++){
 			if (array[i] != 0)
 				heuristic += manhattan(i, array[i]);
-		}*/
+		}
 		
 		return heuristic;
 
