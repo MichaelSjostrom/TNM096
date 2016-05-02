@@ -7,43 +7,58 @@ public class main {
 	
 	public static void main(String[] args) {
 		
-		String[] c1 = {"-A", "B", "K"};
-		String[] c2 = {"A", "-B", "C"};
-		ArrayList<String> clause1;
-		ArrayList<String> clause2;
 		
-		makeNegative(c1);
+		List<String> c1 = new ArrayList<String>();
+		List<String> c2 = new ArrayList<String>();
+
 		
-		clause1 = new ArrayList(Arrays.asList(c1));
-		clause2 = new ArrayList(Arrays.asList(c2));
+		c1.add("-A");
+		c1.add("B");
+		c1.add("K");
 		
-		System.out.println("Cluase1 = ");
-		for(String s : clause1){
-			System.out.println(s);
+		c2.add("A");
+		c2.add("C");
+		c2.add("-K");
+		
+		List<Clause> listOfClauses = new ArrayList<Clause>();
+
+		Clause clause1 = new Clause(c1);
+		Clause clause2 = new Clause(c2);
+		
+		listOfClauses.add(clause1);
+		listOfClauses.add(clause2);
+		
+		makeNegative(clause1);
+		
+		for(Clause s : listOfClauses){
+			for(String k : s.getLiterals()){
+				System.out.println(k);
+			}
 		}
 		
-		ArrayList<ArrayList<String>> result = removeOpposites(clause1, clause2);
+		ArrayList<Clause> result = removeOpposites(clause1, clause2);
 		
-		System.out.println("Result(0) = " + result.get(0));
-		System.out.println("Result(1) = " + result.get(1));
+		System.out.println("Result(0) = " + result.get(0).getLiterals());
+		System.out.println("Result(1) = " + result.get(1).getLiterals());
 		
 	}
 	
-	public static ArrayList<ArrayList<String>> removeOpposites(ArrayList<String> clause1, ArrayList<String> clause2){
+	
+	public static ArrayList<Clause> removeOpposites(Clause clause1, Clause clause2){
 		
-		ArrayList<String> clause1copy = new ArrayList<>(clause1);
-		ArrayList<String> clause2copy = new ArrayList<>(clause2);
+		Clause clause1copy = new Clause(clause1.getLiterals());
+		Clause clause2copy = new Clause(clause2.getLiterals());
 		
-		for(int i = 0; i<clause1.size(); i++){
-			for(int j = 0; j<clause2.size(); j++){
-				if(clause1.get(i).equals(clause2.get(j)) && clause1.get(i).contains("-")){
-					clause1copy.remove(clause1.get(i));
-					clause2copy.remove(clause2.get(j));
+		for(int i = 0; i<clause1.getLiterals().size(); i++){
+			for(int j = 0; j<clause2.getLiterals().size(); j++){
+				if(clause1.getLiterals().get(i).equals(clause2.getLiterals().get(j)) && clause1.getLiterals().get(i).contains("-")){
+					clause1copy.getLiterals().remove(clause1.getLiterals().get(i));
+					clause2copy.getLiterals().remove(clause2.getLiterals().get(j));
 				}
 			}
 		}
 		
-		ArrayList<ArrayList<String>> result = new ArrayList<ArrayList<String>>();
+		ArrayList<Clause> result = new ArrayList<Clause>();
 		result.add(clause1copy);
 		result.add(clause2copy);
 		
@@ -51,15 +66,19 @@ public class main {
 	}
 	
 	//Take the negative value of the hole array
-	private static void makeNegative(String[] c1) {
-		for(int i = 0, len = c1.length; i < len; ++i){
-			if(!c1[i].contains("-")) {
-				c1[i] = "-" + c1[i];
+	private static void makeNegative(Clause c1) {
+		List<String> temp = new ArrayList<String>();
+		for(String s : c1.getLiterals()){
+			String k = "";
+			if(!s.contains("-")) {
+				k = "-" + s;
 			}
 			else {
-				c1[i] = c1[i].replace("-", "");
+				k = s.replace("-", "");
 			}
+			temp.add(k);
 		}
+		c1.setLiterals(temp);
 	}
 	
 	
