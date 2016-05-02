@@ -28,7 +28,14 @@ public class main {
 		
 		for(int i = 0, len = listOfClauses.size(); i < len - 1; ++i){
 			Clause s = listOfClauses.get(i);
-			makeNegative(s);
+			Clause s2 = listOfClauses.get(i + 1);
+			Clause negCop = makeNegative(s);
+			
+			ArrayList<Clause> result = removeOpposites(negCop, s2);
+			
+			System.out.println("Result(0) = " + result.get(0).getLiterals());
+			System.out.println("Result(1) = " + result.get(1).getLiterals());
+			
 		}
 		
 		for(Clause s : listOfClauses){
@@ -36,12 +43,6 @@ public class main {
 				System.out.println(k);
 			}
 		}
-		
-		ArrayList<Clause> result = removeOpposites(clause1, clause2);
-		
-		System.out.println("Result(0) = " + result.get(0).getLiterals());
-		System.out.println("Result(1) = " + result.get(1).getLiterals());
-		
 	}
 	
 	
@@ -67,7 +68,7 @@ public class main {
 	}
 	
 	//Take the negative value of the hole array
-	private static void makeNegative(Clause c1) {
+	private static Clause makeNegative(Clause c1) {
 		List<String> temp = new ArrayList<String>();
 		for(String s : c1.getLiterals()){
 			String k = "";
@@ -79,6 +80,7 @@ public class main {
 			}
 			temp.add(k);
 		}
-		c1.setLiterals(temp);
+		
+		return new Clause(temp);
 	}
 }
