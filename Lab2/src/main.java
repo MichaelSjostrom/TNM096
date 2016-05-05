@@ -10,6 +10,9 @@ public class main {
 		List<String> c1 = new ArrayList<String>();
 		List<String> c2 = new ArrayList<String>();
 		List<String> c3 = new ArrayList<String>();
+		List<String> c4 = new ArrayList<String>();
+		List<String> c5 = new ArrayList<String>();
+		
 
 		
 		c1.add("-A");
@@ -24,15 +27,25 @@ public class main {
 		c3.add("-D");
 		c3.add("C");
 		
+		c4.add("A");
+		
+		c5.add("-D");
+		
+		
+		
 		List<Clause> listOfClauses = new ArrayList<Clause>();
 
 		Clause clause1 = new Clause(c1);
 		Clause clause2 = new Clause(c2);
 		Clause clause3 = new Clause(c3);
+		Clause clause4 = new Clause(c4);
+		Clause clause5 = new Clause(c5);
 		
 		listOfClauses.add(clause1);
 		listOfClauses.add(clause2);
 		listOfClauses.add(clause3);
+		listOfClauses.add(clause4);
+		listOfClauses.add(clause5);
 		
 		ArrayList<Clause> KB = new ArrayList<Clause>();
 		int k = 0;
@@ -65,7 +78,7 @@ public class main {
 		
 	}
 	
-	//Reurns the resolvent of Clause1 and Clause2
+	//Returns the resolvent of Clause1 and Clause2
 	public static Clause getResolvents(Clause clause1, Clause clause2){
 		
 		Clause clause1copy = new Clause(clause1.getLiterals());
