@@ -27,9 +27,9 @@ public class main {
 		c3.add("-D");
 		c3.add("C");
 		
-		c4.add("A");
+		/*c4.add("A");
 		
-		c5.add("-D");
+		c5.add("-D");*/
 
 		
 		
@@ -39,15 +39,15 @@ public class main {
 		Clause clause2 = new Clause(c2);
 		Clause clause3 = new Clause(c3);
 
-		Clause clause4 = new Clause(c4);
-		Clause clause5 = new Clause(c5);
+		//Clause clause4 = new Clause(c4);
+		//Clause clause5 = new Clause(c5);
 
 		
 		listOfClauses.add(clause1);
 		listOfClauses.add(clause2);
 		listOfClauses.add(clause3);
-		listOfClauses.add(clause4);
-		listOfClauses.add(clause5);
+		//listOfClauses.add(clause4);
+		//listOfClauses.add(clause5);
 
 		
 		ArrayList<Clause> KB = new ArrayList<Clause>();
@@ -67,6 +67,7 @@ public class main {
 					
 					//getResolvents returns null if result will contain contradiction 
 					if(result != null){
+						System.out.println("Result = " + result.getLiterals());
 						if(result.getLiterals().isEmpty()){
 							newClauses.add(result);
 							System.out.println("Found empty");
@@ -115,10 +116,12 @@ public class main {
 		    	//If clauses contains the same values.
 			    if (string1.equals(string2)) {
 
-			    	
 			        // Remove the current element from the iterator and the list.
 			        iterator1.remove();
 			        iterator2.remove();
+			        
+			        System.out.println("clause1 = " + clause1.getLiterals());
+			        System.out.println("clause1copy = " + clause1copy.getLiterals());
 			        
 			        checkDoubles++;
 			        

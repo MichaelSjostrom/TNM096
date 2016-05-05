@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class Clause {
@@ -5,7 +6,13 @@ public class Clause {
 	private List<String> literals;
 	
 	public Clause(List<String> literals){
-		this.literals = literals;
+		
+		this.literals = new ArrayList<String>(literals.size());
+		
+		for (int i = 0; i < literals.size(); i++) {
+            String temp = literals.get(i);
+            this.literals.add(temp);
+        }
 	}
 	
 	public List<String> getLiterals(){
