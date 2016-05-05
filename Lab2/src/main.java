@@ -47,9 +47,10 @@ public class main {
 		listOfClauses.add(clause3);
 		
 		ArrayList<Clause> KB = new ArrayList<Clause>();
-		int k = 0;
-		int max = 50;
-		while(k < max){
+		ArrayList<Clause> newClauses = new ArrayList<Clause>();
+		
+		boolean kalle = true;
+		while(true && kalle){
 			for(int i = 0, len = listOfClauses.size(); i < len - 1; ++i){
 				for(int j = i + 1; j < len; ++j){
 					Clause s = listOfClauses.get(i);
@@ -58,28 +59,29 @@ public class main {
 					Clause negCop = makeNegative(s);
 					Clause result = getResolvents(negCop, s2);
 					
-					if(result.getLiterals().isEmpty()){
-						KB.add(result);
-						System.out.println("Found empty");
-						break;
-					}
-					if(!KB.contains(result)) {
-						KB.add(result);
-						listOfClauses.add(result);
-					}else{
-						//TODO: this should not be done like this
-						// should test all new clauses
+					//getResolvents returns null if result will contain contradiction 
+					if(result != null){
+						if(result.getLiterals().isEmpty()){
+							newClauses.add(result);
+							System.out.println("Found empty");
+							kalle = false;
+						}
 						
-						//System.out.println(result.getLiterals());
-						//System.out.println("Not solvable");
-						k = max;
-						break;
-
+						newClauses.add(result);
 					}
-					
+										
 				}
 			}
-			k++;
+			
+			if(KB.containsAll(newClauses) || newClauses.isEmpty()){
+				System.out.println("Cannot resolve more..");
+				kalle = false;
+			}else{
+				KB.addAll(newClauses);
+				listOfClauses.clear();
+				listOfClauses.addAll(newClauses);
+				newClauses.clear();
+			}
 		}
 		System.out.println("=======>>>");
 		for(Clause s : KB){
