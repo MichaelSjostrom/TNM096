@@ -25,7 +25,7 @@ public class main {
 		c3.add("C");
 		
 		c4.add("A");
-		
+
 		c5.add("-K");
 		
 		List<Clause> listOfClauses = new ArrayList<Clause>();
@@ -51,8 +51,7 @@ public class main {
 		boolean kalle = true;
 		while(true && kalle){
 			for(int i = 0, len = listOfClauses.size(); i < len - 1; ++i){
-				
-				System.out.println("i = " + i);
+
 				Clause s = listOfClauses.get(i);
 				
 				for(int j = i + 1; j < len; ++j){
@@ -72,20 +71,23 @@ public class main {
 						
 						newClauses.add(result);
 					}
-										
 				}
 			}
 			
+			KB.addAll(listOfClauses);
+			
 			if(KB.containsAll(newClauses) || newClauses.isEmpty()){
 				System.out.println("Cannot resolve more..");
+				
+				if(newClauses.isEmpty()) System.out.println("is empty caught me");
+				else System.out.println("Not empty");
 				kalle = false;
 			}else{
-				KB.addAll(newClauses);
+				
 				listOfClauses.clear();
 				listOfClauses.addAll(newClauses);
 				newClauses.clear();
 				
-				System.out.println("HEEEJ");
 			}
 		}
 		System.out.println("=======>>>");
@@ -105,7 +107,6 @@ public class main {
 		Clause clause2copy = new Clause(clause2.getLiterals());
 
 		int checkDoubles = 0;
-
 		for (Iterator<String> iterator1 = clause1copy.getLiterals().iterator(); iterator1.hasNext();) {
 		    String string1 = iterator1.next();
 		    for (Iterator<String> iterator2 = clause2copy.getLiterals().iterator(); iterator2.hasNext();){
