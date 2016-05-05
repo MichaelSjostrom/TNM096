@@ -6,14 +6,11 @@ public class main {
 	
 	public static void main(String[] args) {
 		
-		
 		List<String> c1 = new ArrayList<String>();
 		List<String> c2 = new ArrayList<String>();
 		List<String> c3 = new ArrayList<String>();
 		List<String> c4 = new ArrayList<String>();
 		List<String> c5 = new ArrayList<String>();
-		
-
 		
 		c1.add("-A");
 		c1.add("B");
@@ -30,8 +27,6 @@ public class main {
 		c4.add("A");
 		
 		c5.add("-D");
-		
-		
 		
 		List<Clause> listOfClauses = new ArrayList<Clause>();
 
@@ -83,6 +78,7 @@ public class main {
 		
 		Clause clause1copy = new Clause(clause1.getLiterals());
 		Clause clause2copy = new Clause(clause2.getLiterals());
+		int checkDoubles = 0;
 		
 		for (Iterator<String> iterator1 = clause1copy.getLiterals().iterator(); iterator1.hasNext();) {
 		    String string1 = iterator1.next();
@@ -91,11 +87,19 @@ public class main {
 		    	
 		    	//If clauses contains the same values.
 			    if (string1.equals(string2)) {
-
+			    	
 			        // Remove the current element from the iterator and the list.
 			        iterator1.remove();
 			        iterator2.remove();
+			        
+			        checkDoubles++;
+			        
 			    }
+			    
+			    //If doubles already have occured, return null.
+		    	if(checkDoubles > 1){	
+		    		return null;
+		    	}
 		    }
 		}
 		
