@@ -15,22 +15,24 @@ public class main {
 		//c1.add("-A");
 
 		
-		c1.add("-A");
 		c1.add("B");
-		c1.add("C");
+		c1.add("A");
 		
-		c2.add("A");
-		c2.add("D");
-		c2.add("-C");
+		c2.add("B");
+		c2.add("-A");
 		
+		c3.add("C");
+		c3.add("B");
 		c3.add("A");
+		
+		/*c3.add("A");
 		c3.add("-D");
 		c3.add("C");
 		
-		/*c4.add("A");
+		c4.add("A");
 		
-		c5.add("-D");*/
-
+		c5.add("-D");
+		*/
 		
 		
 		List<Clause> listOfClauses = new ArrayList<Clause>();
@@ -39,8 +41,8 @@ public class main {
 		Clause clause2 = new Clause(c2);
 		Clause clause3 = new Clause(c3);
 
-		//Clause clause4 = new Clause(c4);
-		//Clause clause5 = new Clause(c5);
+		Clause clause4 = new Clause(c4);
+		Clause clause5 = new Clause(c5);
 
 		
 		listOfClauses.add(clause1);
@@ -56,7 +58,6 @@ public class main {
 		boolean kalle = true;
 		while(true && kalle){
 			for(int i = 0, len = listOfClauses.size(); i < len - 1; ++i){
-
 				Clause s = listOfClauses.get(i);
 				
 				for(int j = i + 1; j < len; ++j){
@@ -67,7 +68,6 @@ public class main {
 					
 					//getResolvents returns null if result will contain contradiction 
 					if(result != null){
-						System.out.println("Result = " + result.getLiterals());
 						if(result.getLiterals().isEmpty()){
 							newClauses.add(result);
 							System.out.println("Found empty");
@@ -76,18 +76,23 @@ public class main {
 						
 						newClauses.add(result);
 					}
-										
 				}
 			}
 			
+			KB.addAll(listOfClauses);
+			
 			if(KB.containsAll(newClauses) || newClauses.isEmpty()){
 				System.out.println("Cannot resolve more..");
+				
+				if(newClauses.isEmpty()) System.out.println("is empty caught me");
+				else System.out.println("Not empty");
 				kalle = false;
 			}else{
-				KB.addAll(newClauses);
+				
 				listOfClauses.clear();
 				listOfClauses.addAll(newClauses);
 				newClauses.clear();
+				
 			}
 		}
 		System.out.println("=======>>>");
@@ -107,7 +112,6 @@ public class main {
 		Clause clause2copy = new Clause(clause2.getLiterals());
 
 		int checkDoubles = 0;
-
 		for (Iterator<String> iterator1 = clause1copy.getLiterals().iterator(); iterator1.hasNext();) {
 		    String string1 = iterator1.next();
 		    for (Iterator<String> iterator2 = clause2copy.getLiterals().iterator(); iterator2.hasNext();){
@@ -119,9 +123,6 @@ public class main {
 			        // Remove the current element from the iterator and the list.
 			        iterator1.remove();
 			        iterator2.remove();
-			        
-			        System.out.println("clause1 = " + clause1.getLiterals());
-			        System.out.println("clause1copy = " + clause1copy.getLiterals());
 			        
 			        checkDoubles++;
 			        
