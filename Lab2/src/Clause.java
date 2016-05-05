@@ -16,22 +16,42 @@ public class Clause {
 		this.literals = literals;
 	}
 	
-	@Override
-	public boolean equals(Object c){
-		if(c instanceof String){
-			System.out.println("here i am");
-			if(c == this) return true;
+	/*@Override
+	public int hashCode(){
+		int ret = 0;
+		 
+		for(int i = 0, len = this.getLiterals().size(); i < len; ++i){
+			if(this.getLiterals().get(i).charAt(0) == '-'){
+				ret += (int)this.getLiterals().get(i).charAt(1);
+			}
+			ret += (int)this.getLiterals().get(i).charAt(0);
 		}
 		
+		return ret;
+	}
+	*/
+	@Override
+	public boolean equals(Object c){
 		if(c instanceof Clause){
 			Clause test = (Clause)c;
 			
-			for(int i = 0, len = test.literals.size(); i < len; ++i){
-				if(test.literals.get(i) != this.literals.get(i))
+			if(test.getLiterals().size() != this.getLiterals().size()){
+				return false;
+			}
+			
+			for(int i = 0, len = test.getLiterals().size(); i < len; ++i){
+				boolean kalle = false;
+				for(int j = 0; j < len; ++j){
+					if(test.getLiterals().get(i).equals(this.getLiterals().get(j))){
+						kalle = true;
+					}
+				}
+				if(!kalle) {
 					return false;
+				}
 			}
 			return true;
-			
+
 		}
 		
 		return false;

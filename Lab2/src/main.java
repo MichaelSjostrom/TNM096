@@ -12,6 +12,9 @@ public class main {
 		List<String> c4 = new ArrayList<String>();
 		List<String> c5 = new ArrayList<String>();
 		
+		//c1.add("-A");
+
+		
 		c1.add("-A");
 		c1.add("B");
 		c1.add("C");
@@ -27,44 +30,67 @@ public class main {
 		c4.add("A");
 		
 		c5.add("-D");
+
+		
 		
 		List<Clause> listOfClauses = new ArrayList<Clause>();
 
 		Clause clause1 = new Clause(c1);
 		Clause clause2 = new Clause(c2);
 		Clause clause3 = new Clause(c3);
+
 		Clause clause4 = new Clause(c4);
 		Clause clause5 = new Clause(c5);
+
 		
 		listOfClauses.add(clause1);
 		listOfClauses.add(clause2);
 		listOfClauses.add(clause3);
 		listOfClauses.add(clause4);
 		listOfClauses.add(clause5);
+
 		
 		ArrayList<Clause> KB = new ArrayList<Clause>();
-		int k = 0;
-		//while(k < 50){
-		for(int i = 0, len = listOfClauses.size(); i < len - 1; ++i){
-			for(int j = i + 1; j < len; ++j){
+		ArrayList<Clause> newClauses = new ArrayList<Clause>();
+		
+		boolean kalle = true;
+		while(true && kalle){
+			for(int i = 0, len = listOfClauses.size(); i < len - 1; ++i){
+
 				Clause s = listOfClauses.get(i);
-				Clause s2 = listOfClauses.get(j);
-				Clause negCop = makeNegative(s);
-				Clause result = getResolvents(negCop, s2);
 				
-				if(result.getLiterals().isEmpty()){
-					KB.add(result);
-					System.out.println("All Done");
-					break;
-				}
-				if(!KB.contains(result)) KB.add(result);
-				
+				for(int j = i + 1; j < len; ++j){
+					Clause s2 = listOfClauses.get(j);
 					
+					Clause negCop = makeNegative(s);
+					Clause result = getResolvents(negCop, s2);
+					
+					//getResolvents returns null if result will contain contradiction 
+					if(result != null){
+						if(result.getLiterals().isEmpty()){
+							newClauses.add(result);
+							System.out.println("Found empty");
+							kalle = false;
+						}
+						
+						newClauses.add(result);
+					}
+										
+				}
+			}
+			
+			if(KB.containsAll(newClauses) || newClauses.isEmpty()){
+				System.out.println("Cannot resolve more..");
+				kalle = false;
+			}else{
+				KB.addAll(newClauses);
+				listOfClauses.clear();
+				listOfClauses.addAll(newClauses);
+				newClauses.clear();
 			}
 		}
-		//k++;
-		//}
-	
+		System.out.println("=======>>>");
+
 		for(Clause s : KB){
 			System.out.println(s.getLiterals());
 		}
@@ -78,8 +104,9 @@ public class main {
 		
 		Clause clause1copy = new Clause(clause1.getLiterals());
 		Clause clause2copy = new Clause(clause2.getLiterals());
+
 		int checkDoubles = 0;
-		
+
 		for (Iterator<String> iterator1 = clause1copy.getLiterals().iterator(); iterator1.hasNext();) {
 		    String string1 = iterator1.next();
 		    for (Iterator<String> iterator2 = clause2copy.getLiterals().iterator(); iterator2.hasNext();){
@@ -87,6 +114,7 @@ public class main {
 		    	
 		    	//If clauses contains the same values.
 			    if (string1.equals(string2)) {
+
 			    	
 			        // Remove the current element from the iterator and the list.
 			        iterator1.remove();
@@ -100,6 +128,7 @@ public class main {
 		    	if(checkDoubles > 1){	
 		    		return null;
 		    	}
+
 		    }
 		}
 		
