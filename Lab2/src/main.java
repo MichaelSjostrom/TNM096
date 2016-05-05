@@ -13,11 +13,11 @@ public class main {
 		List<String> c5 = new ArrayList<String>();
 		
 		c1.add("-A");
-		c1.add("B");
+		c1.add("L");
 		c1.add("C");
 		
 		c2.add("A");
-		c2.add("D");
+		c2.add("K");
 		c2.add("-C");
 		
 		c3.add("A");
@@ -50,6 +50,7 @@ public class main {
 		
 		boolean kalle = true;
 		while(true && kalle){
+			System.out.println(listOfClauses.size());
 			for(int i = 0, len = listOfClauses.size(); i < len - 1; ++i){
 
 				Clause s = listOfClauses.get(i);
