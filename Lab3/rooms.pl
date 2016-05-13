@@ -2,10 +2,37 @@
 
 %Shakeys actions
 act( go(X, Y),
-     [sAt(X), in(s, room(X)), diff(X, Y)],               % preconditions
-     [sAt(X), in(s, room(X))],                % delete
-     [sAt(Y), in(s, room(Y))]                % add
+
+     [in(s, room), in(X, room), in(Y, room), sAt(X), diff(X, Y)],               % preconditions
+     [sAt(X)],                % delete
+     [sAt(Y)]                % add
      ).
+
+%Fråga va fan detta är
+%act( push(b, X, Y),
+
+%act( climbUp(b),
+%     [floor],
+%     [floor],
+%     [on]
+%).
+
+%act( climbDown(b),
+%     [on],
+%     [on],
+%     [floor]).
+
+%act( turnon(sw),
+%    [on(s, box), lightoff(room)],    %preconditions
+%    [lightoff(room)],                %delete
+%    [lighton(room)]
+%).
+
+%act( turnoff(sw),
+%    [on(s, box), lighton(room)],    %preconditions
+%    [lighton(room)],                %delete
+%    [lightoff(room)]
+%).
 
 % States
 % Shakey should be in room1
