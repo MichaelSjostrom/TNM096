@@ -8,7 +8,7 @@ act( go(X, Y),
      ).
 
 act( push(b, X, Y),
-     [lightsOn(room), ]).
+     [lighton(room), ]).
 
 
 % States
