@@ -84,9 +84,9 @@ public class main {
 				kalle = false;
 			}else{
 				
-				listOfClauses.clear();
+				listOfClauses = new ArrayList<Clause>();
 				listOfClauses.addAll(newClauses);
-				newClauses.clear();
+				newClauses = new ArrayList<Clause>();
 				
 			}
 		}
