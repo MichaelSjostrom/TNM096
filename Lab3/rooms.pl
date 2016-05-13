@@ -7,9 +7,18 @@ act( go(X, Y),
      [sAt(Y)]                % add
      ).
 
+%Fråga va fan detta är
 act( push(b, X, Y),
-     [lighton(room),]).
 
+act( climbUp(b),
+     [floor],
+     [floor],
+     [on]).
+
+act( climbDown(b),
+     [on],
+     [on],
+     [floor]).
 
 act( turnon(sw),
     [on(s, box), lightoff(room)],    %preconditions
