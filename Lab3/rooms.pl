@@ -8,12 +8,13 @@ act( go(X, Y),
      ).
 
 %Fråga va fan detta är
-act( push(b, X, Y),
+%act( push(b, X, Y),
 
 act( climbUp(b),
      [floor],
      [floor],
-     [on]).
+     [on]
+).
 
 act( climbDown(b),
      [on],
@@ -68,6 +69,6 @@ initial_state( [
         diff(room3, room4),
         diff(room2, room1),
         diff(room3, room2),
-        diff(room4, room3),
-    ] ). 
+        diff(room4, room3)
+    ]). 
 
