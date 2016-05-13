@@ -8,8 +8,20 @@ act( go(X, Y),
      ).
 
 act( push(b, X, Y),
-     [lighton(room), ]).
+     [lighton(room),]).
 
+
+act( turnon(sw),
+    [on(s, box), lightoff(room)],    %preconditions
+    [lightoff(room)],                %delete
+    [lighton(room)]
+).
+
+act( turnoff(sw),
+    [on(s, box), lighton(room)],    %preconditions
+    [lighton(room)],                %delete
+    [lightoff(room)]
+).
 
 % States
 % Shakey should be in room1
@@ -24,6 +36,10 @@ initial_state( [
         in(box2, room1),
         in(box3, room1),
         in(box4, room1),
+        room(room1),
+        room(room2),
+        room(room3),
+        room(room4),
         box(box1),
         box(box2),
         box(box3),
@@ -38,5 +54,11 @@ initial_state( [
         diff(box2, box1),
         diff(box3, box2),
         diff(box4, box3),
+        diff(room1, room2),
+        diff(room2, room3),
+        diff(room3, room4),
+        diff(room2, room1),
+        diff(room3, room2),
+        diff(room4, room3),
     ] ). 
 
