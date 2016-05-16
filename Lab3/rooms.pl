@@ -3,9 +3,9 @@
 %Shakeys actions
 act( go(X, Y),
 
-    [sAt(X), in(s, Room)],               % preconditions
-    [sAt(X)],                            % delete
-    [in(s, Room1)]                       % add
+    [in(s, Room), connected(Room, Room2)],
+    [in(s, Room)],
+    [in(s, Room2)]
 
 ).
 
@@ -41,16 +41,14 @@ act( go(X, Y),
 
 %goal_state( [in(s, room1),  in(box2, room2), lightoff(room2)] ).
 
-goal_state( [in(s, Room1) ] ).
+goal_state( [in(s, room1) ] ).
 
 %goal_state( [sAt(X)] ).
     
 initial_state( [
+        s,
+        sAt(init),
         in(s, room3),
-        %in(box1, room1),
-        %in(box2, room1),
-        %in(box3, room1),
-        %in(box4, room1),
         room(room1),
         room(room2),
         room(room3),
@@ -61,6 +59,10 @@ initial_state( [
         connected(room2, korr),
         connected(room3, korr),
         connected(room4, korr),
+        connected(korr, room1),
+        connected(korr, room2),
+        connected(korr, room3),
+        connected(korr, room4),
         diff(room1, room2),
         diff(room2, room3),
         diff(room3, room4),
