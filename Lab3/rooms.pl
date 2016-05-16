@@ -15,24 +15,24 @@ act( go(X, Y),
 ).
 
 
-act( turnLightOff(SW),
-    [in(s, Room), lighton(SW)],
-    [lighton(SW)],
-    [lightoff(SW)]
-).
+%act( turnLightOff(SW),
+%    [in(s, Room), lighton(SW)],
+%    [lighton(SW)],
+%    [lightoff(SW)]
+%).
 
 
-act( climbUp(Box),
-     [on(s, floor)],
-     [on(s, floor)],
-     [on(s, Box)]
-).
+%act( climbUp(Box),
+%     [on(s, floor)],
+%     [on(s, floor)],
+%     [on(s, Box)]
+%).
 
-act( climbDown(Box),
-     [on(s, Box)],
-     [on(s, Box)],
-     [on(s, floor)]
-).
+%act( climbDown(Box),
+%     [on(s, Box)],
+%     [on(s, Box)],
+%     [on(s, floor)]
+%).
 
 %act( turnLightOn(SW),
 %    [in(s, Room), lightoff(SW)],
@@ -40,12 +40,12 @@ act( climbDown(Box),
 %    [lighton(SW)]
 %).
 
-act( pushBox(Box, Room, Room2),
-    [in(s, Room), in(Box, Room), connected(Room, Room2)],
-    [in(s, Room), in(Box, Room)],
-    [in(s, Room2), in(Box, Room2)]
+%act( pushBox(Box, Room, Room2),
+%    [in(s, Room), in(Box, Room), connected(Room, Room2)],
+%    [in(s, Room), in(Box, Room)],
+%    [in(s, Room2), in(Box, Room2)]
 
-).
+%).
 
 act( pushBox(Box, X, Y),
     [in(s, X), in(Box, X), on(s, floor), handempty],
