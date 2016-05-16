@@ -11,16 +11,17 @@ act( goBetweenRooms(Room, Room2),
 
 %act( push(b, X, Y),
 
-%act( climbUp(b),
-%     [floor],
-%     [floor],
-%     [on]
-%).
+act( climbUp(b),
+     [floor],
+     [floor],
+     [on]
+).
 
-%act( climbDown(b),
-%     [on],
-%     [on],
-%     [floor]).
+act( climbDown(),
+     [on],
+     [on],
+     [floor]
+).
 
 %act( turnon(sw),
 %    [on(s, box), lightoff(room)],    %preconditions
@@ -28,11 +29,11 @@ act( goBetweenRooms(Room, Room2),
 %    [lighton(room)]
 %).
 
-%act( turnoff(sw),
-%    [on(s, box), lighton(room)],    %preconditions
-%    [lighton(room)],                %delete
-%    [lightoff(room)]
-%).
+act( turnoff(Room),
+    [lighton(Room)],    %preconditions
+    [lighton(Room)],                %delete
+    [lightoff(Room)]
+).
 
 % States
 % Shakey should be in room1
@@ -41,13 +42,11 @@ act( goBetweenRooms(Room, Room2),
 
 %goal_state( [in(s, room1),  in(box2, room2), lightoff(room2)] ).
 
-goal_state( [in(s, room1) ] ).
+goal_state( [in(s, room1), lightoff(room1) ] ).
 
 %goal_state( [sAt(X)] ).
     
 initial_state( [
-        s,
-        sAt(init),
         in(s, room3),
         room(room1),
         room(room2),
@@ -62,6 +61,15 @@ initial_state( [
         connected(room3, korr),
         connected(korr, room3),
         connected(room4, korr),
+        box(box1),
+        box(box2),
+        diff(box1, box2),
+        diff(box2, box1),
+        lightoff(room3),
+        lightoff(room2),
+        lighton(room1),
+        lighton(room4),
+        lighton(korr),
         diff(room1, room2),
         diff(room2, room3),
         diff(room3, room4),
