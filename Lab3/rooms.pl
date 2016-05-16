@@ -1,7 +1,7 @@
 % Shakey World
 
 %Shakeys actions
-act( go(X, Y),
+act( goBetweenRooms(Room, Room2),
 
     [in(s, Room), connected(Room, Room2)],
     [in(s, Room)],
