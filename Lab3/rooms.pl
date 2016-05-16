@@ -43,7 +43,7 @@ act( pushBox(Box, Room, Room2),
 % Switch of light in room1
 % Box2 should be in room2
 
-goal_state( [in(s, room1),  in(box2, room2), lightoff(room2)] ).
+%goal_state( [in(s, room1),  in(box2, room2), lightoff(room2)] ).
 
 %Go to room1
 %goal_state( [in(s, room1) ] ).
@@ -53,8 +53,9 @@ goal_state( [in(s, room1),  in(box2, room2), lightoff(room2)] ).
 
 %Turn off light in room1, without standing on a box atm
 %goal_state( [in(s, room1), lightoff(sw1)] ).
-    
-%goal_state( [ in(box2, room2 )] ).
+
+%Move box to room2
+goal_state( [ in(box2, room2 )] ).
 
 initial_state( [
         s,
