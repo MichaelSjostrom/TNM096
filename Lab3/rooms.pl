@@ -48,9 +48,9 @@ act( pushBox(Box, Room, Room2),
 ).
 
 act( pushBox(Box, X, Y),
-    [in(s, X), in(Box, X)],
-    [in(s, X), in(Box, X)],
-    [in(s, Y), in(Box, Y)]
+    [in(s, X), in(Box, X), on(s, floor), handempty],
+    [in(s, X), in(Box, X), handempty],
+    [in(s, Y), in(Box, Y), handempty]
 ).
 
 % States
@@ -58,7 +58,9 @@ act( pushBox(Box, X, Y),
 % Switch of light in room1
 % Box2 should be in room2
 
-goal_state( [in(s, room1),  in(box2, room2), lightoff(room2)] ).
+%goal_state( [in(s, room1),  in(box2, room2), lightoff(room2)] ).
+
+goal_state( [in(s, room1), in(box1, sw1)]).
 
 %Go to room1
 %goal_state( [in(s, room1) ] ).
