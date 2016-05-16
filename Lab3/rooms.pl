@@ -11,6 +11,7 @@ act( turnLightOff(SW),
     [in(s, Room), lighton(SW)],
     [lighton(SW)],
     [lightoff(SW)]
+).
 
 act( climbUp(Box),
      [on(s, floor)],
@@ -35,12 +36,14 @@ act( pushBox(Box, Room, Room2),
     [in(s, Room), in(Box, Room)],
     [in(s, Room2), in(Box, Room2)]
 
+).
+
 % States
 % Shakey should be in room1
 % Switch of light in room1
 % Box2 should be in room2
 
-%goal_state( [in(s, room1),  in(box2, room2), lightoff(room2)] ).
+goal_state( [in(s, room1),  in(box2, room2), lightoff(room2)] ).
 
 %Go to room1
 %goal_state( [in(s, room1) ] ).
