@@ -7,11 +7,20 @@ act( goBetweenRooms(Room, Room2),
     [in(s, Room2)]
 ).
 
+
+act( go(X, Y), 
+    [in(X, Room), in(Y, Room), sAt(X)],
+    [sAt(X)],
+    [sAt(Y)]
+).
+
+
 act( turnLightOff(SW),
     [in(s, Room), lighton(SW)],
     [lighton(SW)],
     [lightoff(SW)]
 ).
+
 
 act( climbUp(Box),
      [on(s, floor)],
