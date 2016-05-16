@@ -11,16 +11,16 @@ act( goBetweenRooms(Room, Room2),
 
 %act( push(b, X, Y),
 
-act( climbUp(b),
-     [floor],
-     [floor],
-     [on]
+act( climbUp(Box),
+     [on(s, floor)],
+     [on(s, floor)],
+     [on(s, Box)]
 ).
 
-act( climbDown(),
-     [on],
-     [on],
-     [floor]
+act( climbDown(Box),
+     [on(s, Box)],
+     [on(s, box)],
+     [on(s, floor)]
 ).
 
 %act( turnon(sw),
@@ -42,12 +42,13 @@ act( turnoff(Room),
 
 %goal_state( [in(s, room1),  in(box2, room2), lightoff(room2)] ).
 
-goal_state( [in(s, room1), lightoff(room1) ] ).
+goal_state( [on(s, Box2)] ).
 
 %goal_state( [sAt(X)] ).
     
 initial_state( [
         in(s, room3),
+        on(s, floor),
         room(room1),
         room(room2),
         room(room3),
@@ -65,6 +66,8 @@ initial_state( [
         box(box2),
         diff(box1, box2),
         diff(box2, box1),
+        in(box1, room1),
+        in(box2, room1),
         lightoff(room3),
         lightoff(room2),
         lighton(room1),
