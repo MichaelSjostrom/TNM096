@@ -9,6 +9,12 @@ act( goBetweenRooms(Room, Room2),
 
 ).
 
+act( go(X, Y), 
+    [in(X, Room), in(Y, Room), sAt(X)],
+    [sAt(X)],
+    [sAt(Y)]
+).
+
 %act( push(b, X, Y),
 
 act( climbUp(Box),
@@ -30,7 +36,7 @@ act( climbDown(Box),
 %).
 
 act( turnoff(Room),
-    [lighton(Room)],    %preconditions
+    [lighton(Room)],                %preconditions
     [lighton(Room)],                %delete
     [lightoff(Room)]
 ).
