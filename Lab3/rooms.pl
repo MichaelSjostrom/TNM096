@@ -8,15 +8,15 @@ act( goBetweenRooms(Room, Room2),
 ).
 
 
-act( go(X, Y), 
-    [in(X, Room), in(Y, Room), sAt(X)],
-    [sAt(X)],
-    [sAt(Y)]
-).
+%act( go(X, Y), 
+%    [in(X, Room), in(Y, Room), sAt(X)],
+%    [sAt(X)],
+%    [sAt(Y)]
+%).
 
 
 act( turnLightOff(SW),
-    [in(s, Room), lighton(SW)],
+    [in(s, Room), on(s, Box), lighton(SW)],
     [lighton(SW)],
     [lightoff(SW)]
 ).
@@ -35,16 +35,15 @@ act( climbDown(Box),
 ).
 
 %act( turnLightOn(SW),
-%    [in(s, Room), lightoff(SW)],
+%    [in(s, Room), on(s, Box) , lightoff(SW)],
 %    [lightoff(SW)],
 %    [lighton(SW)]
 %).
 
-act( pushBox(Box, Room, Room2),
-    [in(s, Room), in(Box, Room), connected(Room, Room2)],
+act( pushBoxBetweenRooms(Box, Room, Room2),
+    [in(s, Room), on(s, floor), in(Box, Room), connected(Room, Room2)],
     [in(s, Room), in(Box, Room)],
     [in(s, Room2), in(Box, Room2)]
-
 ).
 
 % States
@@ -52,7 +51,7 @@ act( pushBox(Box, Room, Room2),
 % Switch of light in room1
 % Box2 should be in room2
 
-%goal_state( [in(s, room1),  in(box2, room2), lightoff(room2)] ).
+goal_state( [in(s, room1), lightoff(sw1)] ).
 
 %Go to room1
 %goal_state( [in(s, room1) ] ).
@@ -64,10 +63,9 @@ act( pushBox(Box, Room, Room2),
 %goal_state( [in(s, room1), lightoff(sw1)] ).
 
 %Move box to room2
-goal_state( [ in(box2, room2 )] ).
+%goal_state( [ in(box2, room2 )] ).
 
 initial_state( [
-        s,
         in(s, room3),
         in(box1, room1),
         in(box2, room1),
@@ -91,12 +89,7 @@ initial_state( [
         diff(box1, box2),
         diff(box2, box1),
         in(box1, room1),
-        in(box2, room1),
-        lightoff(room3),
-        lightoff(room2),
-        lighton(room1),
-        lighton(room4),
-        lighton(korr),
+        in(box2, room1),        
         diff(room1, room2),
         diff(room2, room3),
         diff(room3, room4),
@@ -116,10 +109,3 @@ initial_state( [
         lightoff(sw3),
         lightoff(sw4)
     ]). 
-
-        %lightoff(room3),
-        %lightoff(room2),
-        %lighton(room1),
-        %lighton(room4),
-        %lighton(korr),
-        
