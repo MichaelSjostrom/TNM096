@@ -19,7 +19,7 @@ act( climbUp(Box),
 
 act( climbDown(Box),
      [on(s, Box)],
-     [on(s, box)],
+     [on(s, Box)],
      [on(s, floor)]
 ).
 
