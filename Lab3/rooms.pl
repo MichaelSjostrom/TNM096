@@ -9,9 +9,9 @@ act( goBetweenRooms(Room, Room2),
 
 
 act( go(X, Y), 
-    [in(X, Room), in(Y, Room), sAt(X)],
-    [sAt(X)],
-    [sAt(Y)]
+    [in(s, Room), in(X, Room), in(Y, Room), in(s, X)],
+    [in(s, X)],
+    [in(s, Y)]
 ).
 
 
