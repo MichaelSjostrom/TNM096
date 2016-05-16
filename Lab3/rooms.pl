@@ -8,11 +8,11 @@ act( goBetweenRooms(Room, Room2),
 ).
 
 
-%act( go(X, Y), 
-%    [in(X, Room), in(Y, Room), sAt(X)],
-%    [sAt(X)],
-%    [sAt(Y)]
-%).
+act( go(X, Y), 
+    [in(s, Room), in(X, Room), in(Y, Room), in(s, X)],
+    [in(s, X)],
+    [in(s, Y)]
+).
 
 
 act( turnLightOff(SW),
@@ -46,12 +46,22 @@ act( pushBoxBetweenRooms(Box, Room, Room2),
     [in(s, Room2), in(Box, Room2)]
 ).
 
+act( pushBox(Box, X, Y),
+    [in(s, X), in(Box, X), on(s, floor), handempty],
+    [in(s, X), in(Box, X), handempty],
+    [in(s, Y), in(Box, Y), handempty]
+).
+
 % States
 % Shakey should be in room1
 % Switch of light in room1
 % Box2 should be in room2
 
 goal_state( [in(s, room1), lightoff(sw1)] ).
+
+%goal_state( [in(s, room1),  in(box2, room2), lightoff(room2)] ).
+
+%goal_state( [in(s, room1), in(box1, sw1)]).
 
 %Go to room1
 %goal_state( [in(s, room1) ] ).
@@ -69,6 +79,10 @@ initial_state( [
         in(s, room3),
         in(box1, room1),
         in(box2, room1),
+        in(sw1, room1),
+        in(sw2, room2),
+        in(sw3, room3),
+        in(sw4, room4),
         in(s, room3),
         on(s, floor),
         room(room1),
@@ -76,6 +90,22 @@ initial_state( [
         room(room3),
         room(room4),
         room(korr),
+        switch(sw1),
+        switch(sw2),
+        switch(sw3),
+        switch(sw4),
+        diff(sw1, sw2),
+        diff(sw1, sw3),
+        diff(sw1, sw4),
+        diff(sw2, sw1),
+        diff(sw2, sw3),
+        diff(sw2, sw4),
+        diff(sw3, sw1),
+        diff(sw3, sw2),
+        diff(sw3, sw4),
+        diff(sw4, sw1),
+        diff(sw4, sw2),
+        diff(sw4, sw3),
         handempty,
         connected(room1, korr),
         connected(korr, room1),
