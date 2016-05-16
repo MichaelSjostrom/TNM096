@@ -2,12 +2,11 @@
 
 %Shakeys actions
 act( goBetweenRooms(Room, Room2),
-
     [in(s, Room), connected(Room, Room2)],
     [in(s, Room)],
     [in(s, Room2)]
-
 ).
+
 
 act( go(X, Y), 
     [in(X, Room), in(Y, Room), sAt(X)],
@@ -15,7 +14,13 @@ act( go(X, Y),
     [sAt(Y)]
 ).
 
-%act( push(b, X, Y),
+
+act( turnLightOff(SW),
+    [in(s, Room), lighton(SW)],
+    [lighton(SW)],
+    [lightoff(SW)]
+).
+
 
 act( climbUp(Box),
      [on(s, floor)],
@@ -29,16 +34,17 @@ act( climbDown(Box),
      [on(s, floor)]
 ).
 
-%act( turnon(sw),
-%    [on(s, box), lightoff(room)],    %preconditions
-%    [lightoff(room)],                %delete
-%    [lighton(room)]
+%act( turnLightOn(SW),
+%    [in(s, Room), lightoff(SW)],
+%    [lightoff(SW)],
+%    [lighton(SW)]
 %).
 
-act( turnoff(Room),
-    [lighton(Room)],                %preconditions
-    [lighton(Room)],                %delete
-    [lightoff(Room)]
+act( pushBox(Box, Room, Room2),
+    [in(s, Room), in(Box, Room), connected(Room, Room2)],
+    [in(s, Room), in(Box, Room)],
+    [in(s, Room2), in(Box, Room2)]
+
 ).
 
 % States
@@ -46,13 +52,24 @@ act( turnoff(Room),
 % Switch of light in room1
 % Box2 should be in room2
 
-%goal_state( [in(s, room1),  in(box2, room2), lightoff(room2)] ).
+goal_state( [in(s, room1),  in(box2, room2), lightoff(room2)] ).
 
-goal_state( [on(s, Box2)] ).
+%Go to room1
+%goal_state( [in(s, room1) ] ).
 
-%goal_state( [sAt(X)] ).
+%Climb on Box2
+%goal_state( [on(s, Box2)] ).
+
+%Turn off light in room1, without standing on a box atm
+%goal_state( [in(s, room1), lightoff(sw1)] ).
     
+%goal_state( [ in(box2, room2 )] ).
+
 initial_state( [
+        s,
+        in(s, room3),
+        in(box1, room1),
+        in(box2, room1),
         in(s, room3),
         on(s, floor),
         room(room1),
@@ -92,22 +109,16 @@ initial_state( [
         diff(korr, room1),
         diff(korr, room2),
         diff(korr, room3),
-        diff(korr, room4) 
+        diff(korr, room4),
+        lighton(sw1),
+        lightoff(sw2),
+        lightoff(sw3),
+        lightoff(sw4)
     ]). 
 
-        %box(box1),
-        %box(box2),
-        %box(box3),
-        %box(box4),
         %lightoff(room3),
         %lightoff(room2),
         %lighton(room1),
         %lighton(room4),
         %lighton(korr),
-        %diff(box1, box2),
-        %diff(box2, box3),
-        %diff(box3, box4),
-        %diff(box2, box1),
-        %diff(box3, box2),
-        %diff(box4, box3),
-
+        
