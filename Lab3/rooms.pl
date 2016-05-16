@@ -47,6 +47,12 @@ act( pushBox(Box, Room, Room2),
 
 ).
 
+act( pushBox(Box, X, Y),
+    [in(s, X), in(Box, X)],
+    [in(s, X), in(Box, X)],
+    [in(s, Y), in(Box, Y)]
+).
+
 % States
 % Shakey should be in room1
 % Switch of light in room1
@@ -70,6 +76,10 @@ initial_state( [
         in(s, room3),
         in(box1, room1),
         in(box2, room1),
+        in(sw1, room1),
+        in(sw2, room2),
+        in(sw3, room3),
+        in(sw4, room4),
         in(s, room3),
         on(s, floor),
         room(room1),
@@ -77,6 +87,22 @@ initial_state( [
         room(room3),
         room(room4),
         room(korr),
+        switch(sw1),
+        switch(sw2),
+        switch(sw3),
+        switch(sw4),
+        diff(sw1, sw2),
+        diff(sw1, sw3),
+        diff(sw1, sw4),
+        diff(sw2, sw1),
+        diff(sw2, sw3),
+        diff(sw2, sw4),
+        diff(sw3, sw1),
+        diff(sw3, sw2),
+        diff(sw3, sw4),
+        diff(sw4, sw1),
+        diff(sw4, sw2),
+        diff(sw4, sw3),
         handempty,
         connected(room1, korr),
         connected(korr, room1),
@@ -91,11 +117,6 @@ initial_state( [
         diff(box2, box1),
         in(box1, room1),
         in(box2, room1),
-        lightoff(room3),
-        lightoff(room2),
-        lighton(room1),
-        lighton(room4),
-        lighton(korr),
         diff(room1, room2),
         diff(room2, room3),
         diff(room3, room4),
