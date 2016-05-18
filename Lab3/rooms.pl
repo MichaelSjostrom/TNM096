@@ -1,7 +1,7 @@
 % Shakey World
 
 %Shakeys actions
-
+/*
 act( goBetweenRooms(Room, Room2),
     [in(s, Room), room(Room), room(Room2), connected(Room, Room2), diff(Room, Room2)],
     [in(s, Room)],
@@ -140,10 +140,10 @@ initial_state( [
         lighton(sw3),
         lightoff(sw4)
     ]). 
+*/
 
 
-
-/* This works for 1 and 3
+%This works for 1,2,3
 act( goBetweenRooms(Room, Room2),
     [in(s, Room), room(Room), room(Room2), connected(Room, Room2), diff(Room, Room2)],
     [in(s, Room)],
@@ -156,7 +156,30 @@ act( pushBoxBetweenRooms(Box, Room, Room2),
     [in(s, Room2), in(Box, Room2)]
 ).
 
+act( pushBox(Box, X, Y),
+    [box(Box), in(s, X), in(Box, X), in(SW, Y), on(s, floor), notunder(Box, SW)],
+    [in(s, X), in(Box, X), notunder(Box, SW)],
+    [in(s, Y), in(Box, Y), under(Box, SW)]
+).
+
+act( turnLightOff(SW),
+    [in(s, Room), in(SW, Room), lighton(SW), on(s, Box), in(Box, Room), under(Box, SW)],
+    [lighton(SW)],
+    [lightoff(SW)]
+).
+
+act( climbUp(Box),
+     [on(s, floor), in(s, Room), in(Box, Room)],
+     [on(s, floor)],
+     [on(s, Box)]
+).
+
 %Move box to room2
+
+goal_state( [in(s, room1)] ).
+
+%goal_state( [lightoff(sw1)] ).
+
 %goal_state( [ in(box1, room2 )] ).
 
 initial_state( [
@@ -223,4 +246,3 @@ initial_state( [
         lighton(sw3),
         lightoff(sw4)
     ]). 
-*/
