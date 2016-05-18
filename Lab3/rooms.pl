@@ -15,17 +15,17 @@ act( goBetweenRooms(Room, Room2),
 %).
 
 
-%act( turnLightOff(SW),
-%    [in(s, Room), lighton(SW)],
-%    [lighton(SW)],
-%    [lightoff(SW)]
-%).
+act( turnLightOff(SW),
+    [in(s, Room), in(SW, Room), lighton(SW), on(s, Box), in(Box, Room), under(Box, SW)],
+    [lighton(SW)],
+    [lightoff(SW)]
+).
 
-%act( climbUp(Box),
-%     [on(s, floor)],
-%     [on(s, floor)],
-%     [on(s, Box)]
-%).
+act( climbUp(Box),
+     [on(s, floor), in(s, Room), in(Box, Room)],
+     [on(s, floor)],
+     [on(s, Box)]
+).
 
 %act( climbDown(Box),
 %     [on(s, Box)],
@@ -39,17 +39,17 @@ act( goBetweenRooms(Room, Room2),
 %    [lighton(SW)]
 %).
 
-act( pushBoxBetweenRooms(Box, Room, Room2),
-    [box(Box), in(s, Room), on(s, floor), in(Box, Room), connected(Room, Room2)],
-    [in(s, Room), in(Box, Room)],
-    [in(s, Room2), in(Box, Room2)]
-).
-
-%act( pushBox(Box, X, Y),
-%    [box(Box), in(s, X), in(Box, X), on(s, floor), notunder(Box, SW)],
-%    [in(s, X), in(Box, X), notunder(Box, SW)],
-%    [in(s, Y), in(Box, Y), under(Box, SW)]
+%act( pushBoxBetweenRooms(Box, Room, Room2),
+%    [box(Box), in(s, Room), on(s, floor), in(Box, Room), connected(Room, Room2)],
+%    [in(s, Room), in(Box, Room)],
+%    [in(s, Room2), in(Box, Room2)]
 %).
+
+act( pushBox(Box, X, Y),
+    [box(Box), in(s, X), in(Box, X), in(SW, Y), on(s, floor), notunder(Box, SW)],
+    [in(s, X), in(Box, X), notunder(Box, SW)],
+    [in(s, Y), in(Box, Y), under(Box, SW)]
+).
 
 % States
 % Shakey should be in room1
@@ -72,6 +72,9 @@ act( pushBoxBetweenRooms(Box, Room, Room2),
 %Turn off light in room1, without standing on a box atm
 %goal_state( [in(s, room1), lightoff(sw1)] ).
 
+%goal_state( [on(s, box1)] ).
+
+goal_state( [lightoff(sw1)] ).
 
 initial_state( [
         in(s, room3),
