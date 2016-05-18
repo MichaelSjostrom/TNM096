@@ -2,11 +2,11 @@
 
 %Shakeys actions
 
-%act( goBetweenRooms(Room, Room2),
-%    [in(s, Room), connected(Room, Room2), diff(Room, Room2)],
-%    [in(s, Room)],
-%    [in(s, Room2)]
-%).
+act( goBetweenRooms(Room, Room2),
+    [in(s, Room), connected(Room, Room2), diff(Room, Room2), on(s, floor)],
+    [in(s, Room)],
+    [in(s, Room2)]
+).
 
 %act( go(X, Y), 
 %    [in(s, Room), in(X, Room), in(Y, Room), in(s, X), diff(X, Y)],
@@ -15,17 +15,17 @@
 %).
 
 
-%act( turnLightOff(SW),
-%    [in(s, Room), lighton(SW)],
-%    [lighton(SW)],
-%    [lightoff(SW)]
-%).
+act( turnLightOff(SW),
+    [in(Box, Room), on(s, Box), lighton(SW), under(Box, SW), in(SW, Room)],
+    [lighton(SW)],
+    [lightoff(SW)]
+).
 
-%act( climbUp(Box),
-%     [on(s, floor)],
-%     [on(s, floor)],
-%     [on(s, Box)]
-%).
+act( climbUp(Box),
+     [on(s, floor), under(Box, SW), in(s, Room), in(Box, Room)],
+     [on(s, floor)],
+     [on(s, Box)]
+).
 
 %act( climbDown(Box),
 %     [on(s, Box)],
@@ -46,7 +46,7 @@
 %).
 
 act( pushBox(Box, X, Y),
-    [box(Box), in(s, X), in(Box, X), on(s, floor), notunder(Box, SW)],
+    [box(Box), in(s, X), in(Box, X), on(s, floor), notunder(Box, SW), diff(X,Y), connected(X, Y)],
     [in(s, X), in(Box, X), notunder(Box, SW)],
     [in(s, Y), in(Box, Y), under(Box, SW)]
 ).
@@ -55,7 +55,7 @@ act( pushBox(Box, X, Y),
 % Shakey should be in room1
 % Box2 should be in room2
 
-goal_state( [under(box1, sw1)]).
+goal_state( [on(s, box1)] ).
 % Switch of light in room1
 
 %goal_state( [in(s, room1), lightoff(sw1)] ).
@@ -78,8 +78,7 @@ goal_state( [under(box1, sw1)]).
 %goal_state( [ in(box2, room2 )] ).
 
 initial_state( [
-        in(s, room1),
-        %in(s, sw1),
+        in(s, room3),
         in(box1, room1),
         in(box2, room1),
         in(sw1, room1),
@@ -122,7 +121,7 @@ initial_state( [
         diff(box1, box2),
         diff(box2, box1),
         notunder(box1, sw1),
-        notunder(box1, sw1),
+        notunder(box2, sw1),
         diff(room1, room2),
         diff(room2, room3),
         diff(room3, room4),
