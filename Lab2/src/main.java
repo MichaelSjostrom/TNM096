@@ -42,7 +42,7 @@ public class main {
 		listOfClauses.add(clause2);
 		listOfClauses.add(clause3);
 		listOfClauses.add(clause4);
-		listOfClauses.add(clause5);
+		//listOfClauses.add(clause5);
 
 		
 		ArrayList<Clause> KB = new ArrayList<Clause>();
