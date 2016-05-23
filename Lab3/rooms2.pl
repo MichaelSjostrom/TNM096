@@ -31,17 +31,20 @@ act( climbUp(Box),
 
 %Move box to room2
 
+%Shake in room1
 %goal_state( [in(s, room1)] ).
 
+%Turn light off room1
 %goal_state( [lightoff(sw1)] ).
 
+%Move box1 to room2
 %goal_state( [ in(box1, room2 )] ).
 
 initial_state( [
         in(s, room3),
-        %in(s, sw1),
         in(box2, room1),
         in(box1, room1),
+        in(box3, room1),
         in(sw1, room1),
         in(sw2, room2),
         in(sw3, room3),
@@ -78,10 +81,16 @@ initial_state( [
         connected(room4, korr),
         box(box1),
         box(box2),
+        box(box3),
         diff(box1, box2),
         diff(box2, box1),
+        diff(box1, box3),
+        diff(box3, box1),
+        diff(box2, box3),
+        diff(box3, box2),
         notunder(box1, sw1),
         notunder(box2, sw1),
+        notunder(box3, sw2),
         diff(room1, room2),
         diff(room2, room3),
         diff(room3, room4),
